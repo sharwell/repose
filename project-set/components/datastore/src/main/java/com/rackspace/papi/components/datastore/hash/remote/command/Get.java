@@ -7,6 +7,7 @@ import com.rackspace.papi.components.datastore.common.RemoteBehavior;
 import com.rackspace.papi.service.datastore.DatastoreOperationException;
 import com.rackspace.papi.service.datastore.impl.StoredElementImpl;
 import com.rackspace.papi.commons.util.proxy.RequestProxyService;
+import com.rackspace.papi.service.datastore.StoredElement;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
@@ -22,12 +23,12 @@ public class Get extends AbstractRemoteCommand {
    }
 
     @Override
-    public ServiceClientResponse execute(RequestProxyService proxyService, RemoteBehavior remoteBehavior) {
+    public <E> ServiceClientResponse<E> execute(RequestProxyService proxyService, RemoteBehavior remoteBehavior) {
         return proxyService.get(getBaseUrl(), getCacheObjectKey(), getHeaders(remoteBehavior));
     }
     
    @Override
-   public Object handleResponse(ServiceClientResponse response) throws IOException {
+   public StoredElement handleResponse(ServiceClientResponse<?> response) throws IOException {
       final int statusCode = response.getStatusCode();
 
       if (statusCode == HttpStatusCode.OK.intValue()) {

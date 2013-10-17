@@ -31,7 +31,7 @@ import java.util.Map;
 public class DatastoreFilterLogicHandlerFactory extends AbstractConfiguredFilterHandlerFactory<DatastoreFilterLogicHandler> {
 
    private static final Logger LOG = LoggerFactory.getLogger(DatastoreFilterLogicHandlerFactory.class);
-   private final DatastoreAccessControl defaultDatastoreACL = new DatastoreAccessControl(Collections.EMPTY_LIST, false);
+   private final DatastoreAccessControl defaultDatastoreACL = new DatastoreAccessControl(Collections.<InetAddress>emptyList(), false);
    private final MutableClusterView clusterView;
    private final HashRingDatastore hashRingDatastore;
    private DatastoreAccessControl hostACL;

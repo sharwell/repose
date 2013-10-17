@@ -37,7 +37,7 @@ public class DeleteTest {
          final Delete deleteCommand = new Delete("object-key", new InetSocketAddress(InetAddress.getByAddress(new byte[]{127, 0, 0, 1}), 1000));
 
          // RemoteBehavior.ALLOW_FORWARDING
-         final ServiceClientResponse response = mock(ServiceClientResponse.class);
+         final ServiceClientResponse<?> response = mock(ServiceClientResponse.class);
          when(response.getStatusCode()).thenReturn(202);
 
          assertEquals("Delete command must communicate success on 202", Boolean.TRUE, deleteCommand.handleResponse(response));
@@ -47,7 +47,7 @@ public class DeleteTest {
       public void shouldReturnFalseOnFailure() throws Exception {
          final Delete deleteCommand = new Delete("object-key", new InetSocketAddress(InetAddress.getByAddress(new byte[]{127, 0, 0, 1}), 1000));
 
-         final ServiceClientResponse response = mock(ServiceClientResponse.class);
+         final ServiceClientResponse<?> response = mock(ServiceClientResponse.class);
          when(response.getStatusCode()).thenReturn(404);
 
          assertEquals("Delete command must communicate failure on response != 202", Boolean.FALSE, deleteCommand.handleResponse(response));

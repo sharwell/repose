@@ -34,7 +34,7 @@ public abstract class AbstractRemoteCommand implements RemoteCommand {
     }
     
     @Override
-    public abstract ServiceClientResponse execute(RequestProxyService proxyService, RemoteBehavior remoteBehavior);
+    public abstract <E> ServiceClientResponse<E> execute(RequestProxyService proxyService, RemoteBehavior remoteBehavior);
 
     protected byte[] getBody() {
         return null;
