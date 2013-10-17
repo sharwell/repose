@@ -16,8 +16,8 @@ public class SimpleEarClassLoaderContext implements EarClassLoaderContext {
     public SimpleEarClassLoaderContext(final File deploymentRoot) {
         earDescriptor = new EarDescriptor();
 
-        doPrivileged(new PrivilegedAction() {
-            public Object run() {
+        doPrivileged(new PrivilegedAction<Void>() {
+            public Void run() {
                 parentContext = new EarClassLoader(deploymentRoot);
                 childContext = new EarClassLoader(parentContext, deploymentRoot);
                 return null;
@@ -28,8 +28,8 @@ public class SimpleEarClassLoaderContext implements EarClassLoaderContext {
     public SimpleEarClassLoaderContext(final ClassLoader absoluteParent, final File deploymentRoot) {
         earDescriptor = new EarDescriptor();
 
-        doPrivileged(new PrivilegedAction() {
-            public Object run() {
+        doPrivileged(new PrivilegedAction<Void>() {
+            public Void run() {
                 parentContext = new EarClassLoader(absoluteParent, deploymentRoot);
                 childContext = new EarClassLoader(parentContext, deploymentRoot);
                 return null;

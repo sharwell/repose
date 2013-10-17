@@ -50,7 +50,7 @@ public class EarClassLoader extends ClassLoader {
 
    @Override
    protected synchronized Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-      Class c = findLoadedClass(name);
+      Class<?> c = findLoadedClass(name);
 
       if (c == null) {
          try {
