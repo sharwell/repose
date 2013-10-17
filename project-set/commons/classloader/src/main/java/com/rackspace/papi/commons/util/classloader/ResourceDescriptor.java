@@ -16,7 +16,7 @@ public class ResourceDescriptor {
    }
 
    public byte[] digestBytes() {
-      return (byte[])digestBytes.clone();
+      return digestBytes.clone();
    }
 
    public ArchiveEntryDescriptor archiveEntry() {

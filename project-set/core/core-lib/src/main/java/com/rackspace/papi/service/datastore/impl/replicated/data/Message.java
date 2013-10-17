@@ -70,7 +70,7 @@ public class Message implements Serializable {
         }
 
         public byte[] getData() {
-            return (byte[])data.clone();
+            return data.clone();
         }
 
         public int getTtl() {

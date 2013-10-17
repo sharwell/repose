@@ -59,7 +59,7 @@ public class MessageDigesterOutputStream extends OneTimeUseOutputStream {
     }
 
     public byte[] getDigest() {
-        return (byte[])digestBytes.clone();
+        return digestBytes.clone();
     }
 
     @Override
