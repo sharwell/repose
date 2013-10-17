@@ -43,6 +43,11 @@
     </build>
 
     <dependencies>
+      <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-web-api</artifactId>
+      </dependency>
+
         <dependency>
             <groupId>com.rackspace.papi.commons</groupId>
             <artifactId>utilities</artifactId>
@@ -52,9 +57,19 @@
 
         <dependency>
           <groupId>com.mockrunner</groupId>
-          <artifactId>mockrunner</artifactId>
-          <version>0.4.1</version>
+          <artifactId>mockrunner-jdk1.6-j2ee1.3</artifactId>
+          <version>0.4</version>
           <scope>test</scope>
+          <exclusions>
+              <exclusion>
+                  <artifactId>jboss-jee</artifactId>
+                  <groupId>jboss</groupId>
+              </exclusion>
+              <exclusion>
+                  <artifactId>cglib-nodep</artifactId>
+                  <groupId>cglib-nodep</groupId>
+              </exclusion>
+          </exclusions>
         </dependency>
 
         <dependency>
@@ -65,5 +80,11 @@
            <scope>test</scope>
         </dependency>
 
+        <dependency>
+          <groupId>jboss</groupId>
+          <artifactId>jboss-j2ee</artifactId>
+          <version>4.2.2.GA</version>
+          <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
