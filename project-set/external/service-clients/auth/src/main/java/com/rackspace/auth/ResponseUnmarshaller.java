@@ -63,8 +63,8 @@ public class ResponseUnmarshaller {
          try {
             final Object o = resource.unmarshal(reader);
 
-            if (o instanceof JAXBElement && ((JAXBElement) o).getDeclaredType().equals(expectedType)) {
-               return ((JAXBElement<T>) o).getValue();
+            if (o instanceof JAXBElement && ((JAXBElement<?>) o).getDeclaredType().equals(expectedType)) {
+               return expectedType.cast(((JAXBElement<?>) o).getValue());
             } else {
                throw new AuthServiceException("Failed to unmarshall response body. Unexpected element encountered. Body output is in debug.");
 

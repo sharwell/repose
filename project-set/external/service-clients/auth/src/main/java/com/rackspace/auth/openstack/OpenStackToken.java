@@ -131,7 +131,7 @@ public class OpenStackToken extends AuthToken implements Serializable {
 
         for (Object any : response.getAny()) {
             if (any instanceof JAXBElement) {
-                JAXBElement element = (JAXBElement) any;
+                JAXBElement<?> element = (JAXBElement<?>) any;
                 if (element.getValue() instanceof UserForAuthenticateResponse) {
                     return (UserForAuthenticateResponse) element.getValue();
                 }

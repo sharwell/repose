@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.openstack.docs.identity.api.v2.AuthenticateResponse;
 
 import javax.ws.rs.core.MediaType;
@@ -47,8 +48,15 @@ public class AuthenticationServiceClientTest {
             password = "password";
             tenantId = "tenantId";
             responseUnmarshaller = mock(ResponseUnmarshaller.class);
-            serviceClientResponseGet = mock(ServiceClientResponse.class);
-            serviceClientResponsePost = mock(ServiceClientResponse.class);
+
+            @SuppressWarnings("unchecked")
+            ServiceClientResponse<AuthenticateResponse> mockServiceClientResponseGet = mock(ServiceClientResponse.class);
+            serviceClientResponseGet = mockServiceClientResponseGet;
+
+            @SuppressWarnings("unchecked")
+            ServiceClientResponse<AuthenticateResponse> mockServiceClientResponsePost = mock(ServiceClientResponse.class);
+            serviceClientResponsePost = mockServiceClientResponsePost;
+
             serviceClient = mock(ServiceClient.class);
             authenticationServiceClient =
                     new AuthenticationServiceClient(targetHostUri, username, password, tenantId, responseUnmarshaller,
@@ -62,7 +70,7 @@ public class AuthenticationServiceClientTest {
 
         @Test(expected = AuthServiceException.class)
         public void shouldErrorWithCorrectMessageForInternalServerErrorCase() {
-            when(serviceClient.get(anyString(), any(Map.class), anyString(), anyString(),anyString()))
+            when(serviceClient.<AuthenticateResponse>get(anyString(), Matchers.<Map<String, String>>any(), anyString(), anyString(),anyString()))
                     .thenReturn(serviceClientResponseGet);
             when(serviceClient.<AuthenticateResponse>post(anyString(), anyString(), any(MediaType.class)))
                     .thenReturn(serviceClientResponsePost);
@@ -77,7 +85,7 @@ public class AuthenticationServiceClientTest {
 
         @Test(expected = AuthServiceException.class)
         public void shouldErrorWithCorrectMessageForDefaultErrorCase() {
-            when(serviceClient.get(anyString(), any(Map.class), anyString(), anyString()))
+            when(serviceClient.<AuthenticateResponse>get(anyString(), Matchers.<Map<String, String>>any(), anyString(), anyString()))
                     .thenReturn(serviceClientResponseGet);
             when(serviceClient.<AuthenticateResponse>post(anyString(), anyString(), any(MediaType.class)))
                     .thenReturn(serviceClientResponsePost);

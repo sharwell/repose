@@ -37,7 +37,7 @@ public class AuthenticationServiceClientTest {
     public static class WhenAuthenticating {
         private AuthenticationServiceClient authenticationServiceClient;
         private ServiceClient serviceClient;
-        private ServiceClientResponse serviceClientResponse;
+        private ServiceClientResponse<Object> serviceClientResponse;
         private final String authEndpoint = "https://n01.endpoint.auth.rackspacecloud.com/v2.0";
         private ResponseUnmarshaller responseUnmarshaller;
         private final String inputUser = "345897";
@@ -53,7 +53,9 @@ public class AuthenticationServiceClientTest {
         public void setup() throws JAXBException {
 
             serviceClient = mock(ServiceClient.class);
-            serviceClientResponse = mock(ServiceClientResponse.class);
+            @SuppressWarnings("unchecked")
+            ServiceClientResponse<Object> mockServiceClientResponse = mock(ServiceClientResponse.class);
+            serviceClientResponse = mockServiceClientResponse;
 
             JAXBContext jaxbContext = JAXBContext.newInstance(com.rackspacecloud.docs.auth.api.v1.ObjectFactory.class);
 

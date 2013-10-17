@@ -34,7 +34,7 @@ public class RackspaceTokenTest {
      private final String userId = "usertest1";
      private ExtractorResult<String> result = new ExtractorResult<String>(inputUser, inputType);
      private final String inputToken = "aaaaa-aaaa-ddd-aaa-aaaa";
-     private ServiceClientResponse serviceClientResponse;
+     private ServiceClientResponse<Object> serviceClientResponse;
      private final String authEndpoint = "https://n01.endpoint.auth.rackspacecloud.com/v2.0";
      private final Map<String, String> headers = new HashMap<String, String>();
      private ServiceClient serviceClient;
@@ -47,7 +47,9 @@ public class RackspaceTokenTest {
     public void setUp() throws JAXBException{
         
             serviceClient = mock(ServiceClient.class);
-            serviceClientResponse = mock(ServiceClientResponse.class);
+            @SuppressWarnings("unchecked")
+            ServiceClientResponse<Object> mockServiceClientResponse = mock(ServiceClientResponse.class);
+            serviceClientResponse = mockServiceClientResponse;
 
             JAXBContext jaxbContext = JAXBContext.newInstance(com.rackspacecloud.docs.auth.api.v1.ObjectFactory.class);
 
@@ -122,7 +124,7 @@ public class RackspaceTokenTest {
     @Test
     public void testGetExpires() {
    
-        long expResult = (long) 1333643929000L;
+        long expResult = 1333643929000L;
         long result = rackspaceToken.getExpires();
         assertEquals(expResult, result);
       

@@ -15,7 +15,7 @@ import org.junit.BeforeClass;
 import static org.mockito.Mockito.mock;
 
 public class AuthenticationServiceFactoryTest {
-    HttpClientService  httpClientService;
+    HttpClientService<?> httpClientService;
 
     /**
      * Test of build method, of class AuthenticationServiceFactory.

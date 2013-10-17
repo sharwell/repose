@@ -59,7 +59,7 @@ public class AuthenticationServiceClient implements AuthenticationService {
         credentials.setUsername(username);
         credentials.setPassword(password);
 
-        JAXBElement jaxbCredentials = objectFactory.createPasswordCredentials(credentials);
+        JAXBElement<PasswordCredentialsRequiredUsername> jaxbCredentials = objectFactory.createPasswordCredentials(credentials);
 
         AuthenticationRequest request = new AuthenticationRequest();
 
@@ -69,7 +69,7 @@ public class AuthenticationServiceClient implements AuthenticationService {
 
         request.setCredential(jaxbCredentials);
 
-        JAXBElement jaxbRequest = objectFactory.createAuth(request);
+        JAXBElement<AuthenticationRequest> jaxbRequest = objectFactory.createAuth(request);
         requestBody = jaxbToString.transform(jaxbRequest);
     }
 
@@ -189,7 +189,7 @@ public class AuthenticationServiceClient implements AuthenticationService {
         headers.put(AUTH_TOKEN_HEADER, getAdminToken(false));
 
 
-        ServiceClientResponse serviceClientResponse = serviceClient.get(targetHostUri + TOKENS + userToken + ENDPOINTS, headers);
+        ServiceClientResponse<?> serviceClientResponse = serviceClient.get(targetHostUri + TOKENS + userToken + ENDPOINTS, headers);
 
         String rawEndpointsData = "";
 
