@@ -1,6 +1,5 @@
 package com.rackspace.papi.commons.config.resource.impl;
 
-import com.rackspace.papi.commons.config.resource.ConfigurationResource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -16,7 +15,7 @@ public class ByteArrayConfigurationResourceTest {
 
     public static class WhenUsingByteArrayConfigurationResource {
 
-        private ConfigurationResource<ByteArrayConfigurationResource> byteArrayConfigurationResource;
+        private ByteArrayConfigurationResource byteArrayConfigurationResource;
 
         @Before
         public void setup() {

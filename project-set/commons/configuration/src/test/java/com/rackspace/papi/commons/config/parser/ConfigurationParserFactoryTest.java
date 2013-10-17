@@ -10,6 +10,8 @@ import com.rackspace.papi.commons.config.parser.inputstream.InputStreamConfigura
 import com.rackspace.papi.commons.config.parser.jaxb.Element;
 import com.rackspace.papi.commons.config.parser.jaxb.JaxbConfigurationParser;
 import com.rackspace.papi.commons.config.parser.properties.PropertiesFileConfigurationParser;
+import java.io.InputStream;
+import java.util.Properties;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -31,7 +33,7 @@ public class ConfigurationParserFactoryTest {
         Throwable caught = null;
       
        try {
-            ConfigurationParser result = ConfigurationParserFactory.newConfigurationParser(ConfigurationParserType.valueOf("test"),null);
+            ConfigurationParser<?> result = ConfigurationParserFactory.newConfigurationParser(ConfigurationParserType.valueOf("test"),null);
          } catch (Throwable t) {
             caught = t;
          }
@@ -41,13 +43,13 @@ public class ConfigurationParserFactoryTest {
 
     @Test
     public void testNewConfigurationParserWithRawType() {
-        ConfigurationParser result = ConfigurationParserFactory.newConfigurationParser(ConfigurationParserType.RAW, null);
+        ConfigurationParser<InputStream> result = ConfigurationParserFactory.<InputStream>newConfigurationParser(ConfigurationParserType.RAW, null);
         assertThat(result, IsInstanceOf.instanceOf(InputStreamConfigurationParser.class));
     }
 
     @Test
     public void testNewConfigurationParserWithPropertiesType() {
-        ConfigurationParser result = ConfigurationParserFactory.newConfigurationParser(ConfigurationParserType.PROPERTIES, null);
+        ConfigurationParser<Properties> result = ConfigurationParserFactory.<Properties>newConfigurationParser(ConfigurationParserType.PROPERTIES, null);
         assertThat(result, IsInstanceOf.instanceOf(PropertiesFileConfigurationParser.class));
     }
 
@@ -57,7 +59,7 @@ public class ConfigurationParserFactoryTest {
     @Test
     public void testNewInputStreamConfigurationParser() {
 
-        ConfigurationParser result = ConfigurationParserFactory.newInputStreamConfigurationParser();
+        ConfigurationParser<InputStream> result = ConfigurationParserFactory.newInputStreamConfigurationParser();
         assertThat(result,IsInstanceOf.instanceOf(InputStreamConfigurationParser.class));
       
         
@@ -69,7 +71,7 @@ public class ConfigurationParserFactoryTest {
     @Test
     public void testNewPropertiesFileConfigurationParser() {
        
-        ConfigurationParser result = ConfigurationParserFactory.newPropertiesFileConfigurationParser();
+        ConfigurationParser<Properties> result = ConfigurationParserFactory.newPropertiesFileConfigurationParser();
         assertThat(result,IsInstanceOf.instanceOf(PropertiesFileConfigurationParser.class));
     }
 
@@ -81,7 +83,7 @@ public class ConfigurationParserFactoryTest {
      Throwable caught = null;
       
         try {
-        JaxbConfigurationParser result = ConfigurationParserFactory.getXmlConfigurationParser(Element.class,  null);
+        JaxbConfigurationParser<Element> result = ConfigurationParserFactory.getXmlConfigurationParser(Element.class,  null);
         
          } catch (Throwable t) {
             caught = t;
