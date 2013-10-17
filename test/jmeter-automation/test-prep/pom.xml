@@ -29,21 +29,6 @@
         <connection>scm:git:ssh://git@github.com/rackerlabs/repose.git</connection>
     </scm>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>public.maven.research.rackspace.com</id>
-            <name>Rackspace Research</name>
-            <url>http://maven.research.rackspacecloud.com/content/groups/aggregate</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.jmeter</groupId>

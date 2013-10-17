@@ -14,7 +14,11 @@
         profiles.
     </description>
     
-
+    <parent>
+      <groupId>org.sonatype.oss</groupId>
+      <artifactId>oss-parent</artifactId>
+      <version>7</version>
+    </parent>
     
     <organization>
         <name>Rackspace Cloud Research</name>
@@ -53,31 +57,6 @@
     <scm>
         <connection>scm:git:ssh://git@github.com/rackerlabs/repose.git</connection>
     </scm>
-    
-    <repositories>
-        <repository>
-            <id>public.maven.research.rackspace.com</id>
-            
-            <name>Rackspace Research</name>
-            <url>http://maven.research.rackspacecloud.com/content/groups/aggregate</url>
-        </repository>
-    </repositories>
-    
-    <distributionManagement>
-        <repository>
-            <id>releases.maven.research.rackspace.com</id>
-            
-            <name>Rackspace Research Releases</name>
-            <url>http://maven.research.rackspacecloud.com/content/repositories/releases</url>
-        </repository>
-        
-        <snapshotRepository>
-            <id>snapshots.maven.research.rackspace.com</id>
-            
-            <name>Rackspace Research Snapshots</name>
-            <url>http://maven.research.rackspacecloud.com/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
     
     <build>
         <pluginManagement>

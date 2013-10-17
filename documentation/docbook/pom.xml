@@ -70,11 +70,4 @@
             </plugin>
         </plugins>
     </build>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>rackspace-research</id>
-            <name>Rackspace Research Repository</name>
-            <url>http://maven.research.rackspacecloud.com/content/groups/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>
