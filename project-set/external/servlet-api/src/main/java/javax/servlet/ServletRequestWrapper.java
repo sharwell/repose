@@ -547,7 +547,7 @@ public class ServletRequestWrapper implements ServletRequest {
      *
      * @since Servlet 3.0
      */
-    public boolean isWrapperFor(Class wrappedType) {
+    public boolean isWrapperFor(Class<? extends ServletRequest> wrappedType) {
         if (!ServletRequest.class.isAssignableFrom(wrappedType)) {
             throw new IllegalArgumentException("Given class " +
                 wrappedType.getName() + " not a subinterface of " +
