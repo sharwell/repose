@@ -1,6 +1,6 @@
 package com.rackspace.papi.commons.util.servlet.http;
 
-public class RouteDestination implements Comparable {
+public class RouteDestination implements Comparable<RouteDestination> {
 
     private final String destinationId;
     private final String uri;
@@ -8,13 +8,7 @@ public class RouteDestination implements Comparable {
     private final double quality;
 
     @Override
-    public int compareTo(Object o) {
-        if (!(o instanceof RouteDestination)) {
-            throw new IllegalArgumentException("Cannot compare to non RouteDestination instance");
-        }
-
-        RouteDestination r = (RouteDestination) o;
-
+    public int compareTo(RouteDestination r) {
         int result = Double.compare(quality, r.quality);
 
         if (result == 0) {
@@ -34,7 +28,7 @@ public class RouteDestination implements Comparable {
             return false;
         }
         
-        return compareTo(o) == 0;
+        return compareTo((RouteDestination)o) == 0;
     }
     private static final int BASE_HASH = 3;
     private static final int PRIME = 79;

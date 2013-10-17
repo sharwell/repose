@@ -6,10 +6,11 @@ package com.rackspace.papi.commons.util.regex;
  */
 public class SelectorResult<K> {
 
-   private static final SelectorResult EMPTY_INSTANCE = new SelectorResult(null);
+   private static final SelectorResult<?> EMPTY_INSTANCE = new SelectorResult<Object>(null);
    
-   public static SelectorResult emptyResult() {
-      return EMPTY_INSTANCE;
+   @SuppressWarnings("unchecked") // this is safe
+   public static <K> SelectorResult<K> emptyResult() {
+      return (SelectorResult<K>)EMPTY_INSTANCE;
    }
    
    private final K key;

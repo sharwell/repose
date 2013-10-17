@@ -25,13 +25,13 @@ public class QualityFactorHeaderChooserTest {
    @Ignore
    public static class TestParent {
 
-      protected QualityFactorHeaderChooser qualityFactorHeaderChooser;
+      protected QualityFactorHeaderChooser<HeaderValue> qualityFactorHeaderChooser;
       protected HeaderValue defaultHeaderValue;
 
       @Before
       public void beforeAny() {
          defaultHeaderValue = new MediaType(MimeType.APPLICATION_JSON.getMimeType(), MimeType.APPLICATION_JSON, -1);
-         qualityFactorHeaderChooser = new QualityFactorHeaderChooser(defaultHeaderValue);
+         qualityFactorHeaderChooser = new QualityFactorHeaderChooser<HeaderValue>(defaultHeaderValue);
       }
    }
 
@@ -70,7 +70,7 @@ public class QualityFactorHeaderChooserTest {
 
       @Test
       public void shouldReturnDefaultWhenGivenEmptyListOfHeaderValues() {
-         assertEquals("Quality factor utility must return default when an empty header value list is given", defaultHeaderValue, qualityFactorHeaderChooser.choosePreferredHeaderValue(Collections.EMPTY_LIST));
+         assertEquals("Quality factor utility must return default when an empty header value list is given", defaultHeaderValue, qualityFactorHeaderChooser.choosePreferredHeaderValue(Collections.<HeaderValue>emptyList()));
       }
 
       @Test

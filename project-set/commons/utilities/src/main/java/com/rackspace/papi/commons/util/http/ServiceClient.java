@@ -51,14 +51,14 @@ public class ServiceClient {
     private String password;
     private String connectionPoolId;
 
-    private HttpClientService httpClientService;
+    private HttpClientService<?> httpClientService;
 
-    public ServiceClient(String connectionPoolId,HttpClientService httpClientService) {
+    public ServiceClient(String connectionPoolId,HttpClientService<?> httpClientService) {
         this.connectionPoolId= connectionPoolId;
         this.httpClientService=httpClientService;
     }
 
-    public ServiceClient(String targetHostUri, String username, String password, String connectionPoolId,HttpClientService httpClientService) {
+    public ServiceClient(String targetHostUri, String username, String password, String connectionPoolId,HttpClientService<?> httpClientService) {
         this.targetHostUri =  targetHostUri;
         this.username  =  username;
         this.password  = password;
@@ -111,7 +111,7 @@ public class ServiceClient {
         }
     }
 
-    private ServiceClientResponse execute(HttpRequestBase base,String... queryParameters) {
+    private <E> ServiceClientResponse<E> execute(HttpRequestBase base,String... queryParameters) {
         try {
 
             HttpClient client=getClientWithBasicAuth();
@@ -129,7 +129,7 @@ public class ServiceClient {
                 EntityUtils.consume(entity);
             }
 
-            return new ServiceClientResponse(httpResponse.getStatusLine().getStatusCode(), stream);
+            return new ServiceClientResponse<E>(httpResponse.getStatusLine().getStatusCode(), stream);
         } catch (ServiceClientException  ex){
             LOG.error("Failed to obtain an HTTP default client connection", ex);
         }
@@ -140,10 +140,10 @@ public class ServiceClient {
 
         }
 
-        return new ServiceClientResponse(HttpStatusCode.INTERNAL_SERVER_ERROR.intValue(), null);
+        return new ServiceClientResponse<E>(HttpStatusCode.INTERNAL_SERVER_ERROR.intValue(), (E)null);
     }
 
-    public ServiceClientResponse post(String uri, String body, MediaType contentType) {
+    public <E> ServiceClientResponse<E> post(String uri, String body, MediaType contentType) {
 
         HttpPost post = new HttpPost(uri);
 
@@ -161,7 +161,7 @@ public class ServiceClient {
     }
 
 
-    public ServiceClientResponse get(String uri, Map<String, String> headers, String... queryParameters){
+    public <E> ServiceClientResponse<E> get(String uri, Map<String, String> headers, String... queryParameters){
 
         URI uriBuilt = null;
         HttpGet httpget = new HttpGet(uri);
@@ -183,7 +183,7 @@ public class ServiceClient {
 
             } catch (URISyntaxException e) {
                 LOG.error("Error building request URI", e);
-                return new ServiceClientResponse(HttpStatusCode.INTERNAL_SERVER_ERROR.intValue(), null);
+                return new ServiceClientResponse<E>(HttpStatusCode.INTERNAL_SERVER_ERROR.intValue(), (E)null);
 
             }
 

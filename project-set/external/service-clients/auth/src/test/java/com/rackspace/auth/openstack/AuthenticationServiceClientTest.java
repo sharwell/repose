@@ -64,7 +64,7 @@ public class AuthenticationServiceClientTest {
         public void shouldErrorWithCorrectMessageForInternalServerErrorCase() {
             when(serviceClient.get(anyString(), any(Map.class), anyString(), anyString(),anyString()))
                     .thenReturn(serviceClientResponseGet);
-            when(serviceClient.post(anyString(), anyString(), any(MediaType.class)))
+            when(serviceClient.<AuthenticateResponse>post(anyString(), anyString(), any(MediaType.class)))
                     .thenReturn(serviceClientResponsePost);
             when(serviceClientResponseGet.getStatusCode()).thenReturn(HttpStatusCode.INTERNAL_SERVER_ERROR.intValue());
             when(serviceClientResponsePost.getStatusCode()).thenReturn(HttpStatusCode.INTERNAL_SERVER_ERROR.intValue());
@@ -79,7 +79,7 @@ public class AuthenticationServiceClientTest {
         public void shouldErrorWithCorrectMessageForDefaultErrorCase() {
             when(serviceClient.get(anyString(), any(Map.class), anyString(), anyString()))
                     .thenReturn(serviceClientResponseGet);
-            when(serviceClient.post(anyString(), anyString(), any(MediaType.class)))
+            when(serviceClient.<AuthenticateResponse>post(anyString(), anyString(), any(MediaType.class)))
                     .thenReturn(serviceClientResponsePost);
             when(serviceClientResponseGet.getStatusCode()).thenReturn(999);
             when(serviceClientResponsePost.getStatusCode()).thenReturn(999);

@@ -19,7 +19,7 @@ public class SetUtilitiesTest {
         @Test
         public void shouldReturnFalseIfFirstSetIsNull() {
             Set<String> one = null;
-            Set<String> two = new HashSet();
+            Set<String> two = new HashSet<String>();
             two.add("abc");
 
             assertFalse(SetUtilities.nullSafeEquals(one, two));
@@ -27,7 +27,7 @@ public class SetUtilitiesTest {
 
         @Test
         public void shouldReturnFalseIfSecondSetIsNull() {
-            Set<String> one = new HashSet();
+            Set<String> one = new HashSet<String>();
             one.add("abc");
             Set<String> two = null;
 
@@ -36,9 +36,9 @@ public class SetUtilitiesTest {
 
         @Test
         public void shouldReturnFalseIfNonNullSetsAreDifferent() {
-            Set<String> one = new HashSet();
+            Set<String> one = new HashSet<String>();
             one.add("abc");
-            Set<String> two = new HashSet();
+            Set<String> two = new HashSet<String>();
             two.add("def");
 
             assertFalse(SetUtilities.nullSafeEquals(one, two));
@@ -54,9 +54,9 @@ public class SetUtilitiesTest {
 
         @Test
         public void shouldReturnTrueIfNonNullSetsAreSame() {
-            Set<String> one = new HashSet();
+            Set<String> one = new HashSet<String>();
             one.add("abc");
-            Set<String> two = new HashSet();
+            Set<String> two = new HashSet<String>();
             two.add("abc");
 
             assertTrue(SetUtilities.nullSafeEquals(one, two));
@@ -64,9 +64,9 @@ public class SetUtilitiesTest {
 
         @Test
         public void shouldReturnFalseIfNonNullSetsAreSameButDifferentCase() {
-            Set<String> one = new HashSet();
+            Set<String> one = new HashSet<String>();
             one.add("abc");
-            Set<String> two = new HashSet();
+            Set<String> two = new HashSet<String>();
             two.add("AbC");
 
             assertFalse(SetUtilities.nullSafeEquals(one, two));

@@ -25,7 +25,7 @@ public class QualityFactorHeaderChooser <T extends HeaderValue> implements Heade
    
    @Override
    public T choosePreferredHeaderValue(Iterable<T> headerValues) {
-      final Iterator<T> headerValueIterator = headerValues != null ? headerValues.iterator() : Collections.EMPTY_LIST.iterator();
+      final Iterator<T> headerValueIterator = headerValues != null ? headerValues.iterator() : Collections.<T>emptyList().iterator();
       
       T prefered = defaultValue;
       
@@ -43,7 +43,7 @@ public class QualityFactorHeaderChooser <T extends HeaderValue> implements Heade
    
    @Override
    public List<T> choosePreferredHeaderValues(Iterable<T> headerValues) {
-      final Iterator<T> headerValueIterator = headerValues != null ? headerValues.iterator() : Collections.EMPTY_LIST.iterator();
+      final Iterator<T> headerValueIterator = headerValues != null ? headerValues.iterator() : Collections.<T>emptyList().iterator();
       final List<T> preferredHeaders = new ArrayList<T>();
 
       double currentQuality = -1;
@@ -61,7 +61,7 @@ public class QualityFactorHeaderChooser <T extends HeaderValue> implements Heade
       }
 
       if (preferredHeaders.isEmpty() && defaultValue != null) {
-         preferredHeaders.add((T) defaultValue);
+         preferredHeaders.add(defaultValue);
       }
 
       return preferredHeaders;

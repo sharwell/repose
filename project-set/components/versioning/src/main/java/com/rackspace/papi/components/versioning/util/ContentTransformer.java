@@ -20,12 +20,12 @@ public class ContentTransformer {
     private static final String JSON_XSLT = "/META-INF/transform/xslt/version-json.xsl";
     
     @Deprecated
-    private final Transform<JAXBElement, String> jsonTransform;
+    private final Transform<JAXBElement<?>, String> jsonTransform;
     @Deprecated
-    private final Transform<JAXBElement, String> xmlTransform;
+    private final Transform<JAXBElement<?>, String> xmlTransform;
     
-    private final StreamTransform<JAXBElement, OutputStream> jsonStreamTransform;
-    private final StreamTransform<JAXBElement, OutputStream> xmlStreamTransform;
+    private final StreamTransform<JAXBElement<?>, OutputStream> jsonStreamTransform;
+    private final StreamTransform<JAXBElement<?>, OutputStream> xmlStreamTransform;
 
     public ContentTransformer() {
         try {

@@ -150,28 +150,28 @@ public class RequestProxyServiceImpl implements RequestProxyService {
     }
 
     @Override
-    public ServiceClientResponse get(String uri, Map<String, String> headers) {
+    public <E> ServiceClientResponse<E> get(String uri, Map<String, String> headers) {
         HttpGet get = new HttpGet(uri);
         setHeaders(get, headers);
         return execute(get);
     }
 
     @Override
-    public ServiceClientResponse get(String baseUri, String extraUri, Map<String, String> headers) {
+    public <E> ServiceClientResponse<E> get(String baseUri, String extraUri, Map<String, String> headers) {
         HttpGet get = new HttpGet(StringUriUtilities.appendPath(baseUri, extraUri));
         setHeaders(get, headers);
         return execute(get);
     }
 
     @Override
-    public ServiceClientResponse delete(String baseUri, String extraUri, Map<String, String> headers) {
+    public <E> ServiceClientResponse<E> delete(String baseUri, String extraUri, Map<String, String> headers) {
         HttpDelete delete = new HttpDelete(StringUriUtilities.appendPath(baseUri, extraUri));
         setHeaders(delete, headers);
         return execute(delete);
     }
 
     @Override
-    public ServiceClientResponse put(String uri, Map<String, String> headers, byte[] body) {
+    public <E> ServiceClientResponse<E> put(String uri, Map<String, String> headers, byte[] body) {
         HttpPut put = new HttpPut(uri);
         setHeaders(put, headers);
         if (body != null && body.length > 0) {
@@ -181,7 +181,7 @@ public class RequestProxyServiceImpl implements RequestProxyService {
     }
 
     @Override
-    public ServiceClientResponse put(String baseUri, String path, Map<String, String> headers, byte[] body) {
+    public <E> ServiceClientResponse<E> put(String baseUri, String path, Map<String, String> headers, byte[] body) {
         HttpPut put = new HttpPut(StringUriUtilities.appendPath(baseUri, path));
         setHeaders(put, headers);
         if (body != null && body.length > 0) {

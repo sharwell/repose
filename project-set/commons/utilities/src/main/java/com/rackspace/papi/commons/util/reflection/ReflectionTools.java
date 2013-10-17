@@ -16,7 +16,7 @@ public final class ReflectionTools {
    }
 
    public static <T> Constructor<T> getConstructor(Class<T> clazz, Class<?>[] parameters) throws NoSuchMethodException {
-      for (Constructor<T> constructor : (Constructor<T>[]) clazz.getConstructors()) {
+      for (Constructor<?> constructor : clazz.getConstructors()) {
          final Class<?>[] constructorParameters = constructor.getParameterTypes();
 
          if (parameters.length != constructorParameters.length) {
@@ -37,7 +37,7 @@ public final class ReflectionTools {
          }
 
          if (suitable) {
-            return constructor;
+            return clazz.getConstructor(constructorParameters);
          }
       }
 

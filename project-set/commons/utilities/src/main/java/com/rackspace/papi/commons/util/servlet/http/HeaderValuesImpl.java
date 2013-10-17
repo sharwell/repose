@@ -144,7 +144,7 @@ public final class HeaderValuesImpl implements HeaderValues {
     public List<HeaderValue> getPreferredHeaderValues(String name, HeaderValue defaultValue) {
         List<HeaderValue> headerValues = headers.get(name.toLowerCase());
 
-        QualityFactorHeaderChooser chooser = new QualityFactorHeaderChooser<HeaderValue>();
+        QualityFactorHeaderChooser<HeaderValue> chooser = new QualityFactorHeaderChooser<HeaderValue>();
         List<HeaderValue> values = chooser.choosePreferredHeaderValues(headerValues);
 
         if (values.isEmpty() && defaultValue != null) {

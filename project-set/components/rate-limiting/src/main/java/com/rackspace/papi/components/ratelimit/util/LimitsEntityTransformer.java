@@ -19,8 +19,8 @@ public class LimitsEntityTransformer {
 
     public static final String XSLT_LOCATION = "/META-INF/xslt/limits-json.xsl";
     
-    private final Transform<JAXBElement, String> jsonTransform;
-    private final Transform<JAXBElement, String> xmlTransform;
+    private final Transform<JAXBElement<?>, String> jsonTransform;
+    private final Transform<JAXBElement<?>, String> xmlTransform;
 
     public LimitsEntityTransformer() {
         this(buildJaxbContext());

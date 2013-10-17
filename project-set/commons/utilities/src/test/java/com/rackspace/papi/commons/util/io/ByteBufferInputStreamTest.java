@@ -73,10 +73,10 @@ public class ByteBufferInputStreamTest {
       private ByteBufferInputStream stream;
       private static final int MAGIC_SKIP = 42;
 
-      private static class CustomSkipAnswer implements Answer {
+      private static class CustomSkipAnswer implements Answer<Integer> {
 
          @Override
-         public Object answer(InvocationOnMock invocation) throws Throwable {
+         public Integer answer(InvocationOnMock invocation) throws Throwable {
             Object[] args = invocation.getArguments();
             for (Object arg : args) {
                if (arg instanceof Integer) {
@@ -173,10 +173,10 @@ public class ByteBufferInputStreamTest {
    }
 
    @Ignore
-   public static class ByteReadAnswer implements Answer {
+   public static class ByteReadAnswer implements Answer<Integer> {
 
       @Override
-      public Object answer(InvocationOnMock invocation) throws Throwable {
+      public Integer answer(InvocationOnMock invocation) throws Throwable {
 
          // Fill the byte array with integers based on the index 
          int count = 0;
@@ -190,7 +190,7 @@ public class ByteBufferInputStreamTest {
                }
             }
          }
-         return new Integer(count);
+         return count;
       }
    }
 

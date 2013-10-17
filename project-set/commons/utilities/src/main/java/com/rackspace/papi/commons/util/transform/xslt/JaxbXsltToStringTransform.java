@@ -13,7 +13,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
 
-public class JaxbXsltToStringTransform implements Transform<JAXBElement, String> {
+public class JaxbXsltToStringTransform implements Transform<JAXBElement<?>, String> {
 
     private final Pool<Transformer> xsltResourcePool;
     private final Templates transformationTemplates;
@@ -29,7 +29,7 @@ public class JaxbXsltToStringTransform implements Transform<JAXBElement, String>
     }
 
     @Override
-    public String transform(final JAXBElement source) {
+    public String transform(final JAXBElement<?> source) {
         return xsltResourcePool.use(new ResourceContext<Transformer, String>() {
 
             @Override

@@ -44,7 +44,7 @@ public class QualityFactorUtilityTest {
 
       @Test
       public void shouldReturnNullWhenGivenEmptyListOfHeaderValues() {
-         assertTrue("Quality factor utility must return null when an empty header value list is given", QualityFactorUtility.choosePreferredHeaderValue(Collections.EMPTY_LIST) == null);
+         assertTrue("Quality factor utility must return null when an empty header value list is given", QualityFactorUtility.choosePreferredHeaderValue(Collections.<HeaderValue>emptyList()) == null);
       }
 
       @Test

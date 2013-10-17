@@ -13,7 +13,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.stream.StreamResult;
 import java.io.OutputStream;
 
-public class XsltToStreamTransform<T extends OutputStream> implements StreamTransform<JAXBElement, T> {
+public class XsltToStreamTransform<T extends OutputStream> implements StreamTransform<JAXBElement<?>, T> {
 
     private final Pool<Transformer> xsltResourcePool;
     private final Templates transformationTemplates;
@@ -29,7 +29,7 @@ public class XsltToStreamTransform<T extends OutputStream> implements StreamTran
     }
 
     @Override
-    public void transform(final JAXBElement source, final T target) {
+    public void transform(final JAXBElement<?> source, final T target) {
         xsltResourcePool.use(new SimpleResourceContext<Transformer>() {
 
             @Override

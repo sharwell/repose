@@ -69,7 +69,7 @@ public class HeaderValueImpl implements HeaderValue {
     */
    public HeaderValueImpl(String value, Map<String, String> parameters) {
       this.parsedQualityFactor = getQualityFactor(parameters);
-      this.parameters = new HashMap(parameters);
+      this.parameters = new HashMap<String, String>(parameters);
       this.value = value;
    }
 
@@ -183,10 +183,10 @@ public class HeaderValueImpl implements HeaderValue {
    public boolean equalsTo(HeaderValue headerValue) {
 
 
-      Map<String, String> compareParams = new HashMap(parameters);
+      Map<String, String> compareParams = new HashMap<String, String>(parameters);
       compareParams.remove(QUALITY_FACTOR_PARAM_NAME);
 
-      Map<String, String> compareParams2 = new HashMap(headerValue.getParameters());
+      Map<String, String> compareParams2 = new HashMap<String, String>(headerValue.getParameters());
       compareParams2.remove(QUALITY_FACTOR_PARAM_NAME);
 
       if (StringUtilities.nullSafeEqualsIgnoreCase(headerValue.getValue(), value)

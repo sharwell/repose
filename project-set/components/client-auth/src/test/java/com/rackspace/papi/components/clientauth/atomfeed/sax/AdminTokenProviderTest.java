@@ -65,7 +65,7 @@ public class AdminTokenProviderTest {
       
       InputStream is = new ByteArrayInputStream(baos.toByteArray());
       ServiceClientResponse<AuthenticateResponse> resp = new ServiceClientResponse<AuthenticateResponse>(200, is);
-      when(client.post(anyString(), anyString(), eq(MediaType.APPLICATION_XML_TYPE))).thenReturn(resp);
+      when(client.<AuthenticateResponse>post(anyString(), anyString(), eq(MediaType.APPLICATION_XML_TYPE))).thenReturn(resp);
       provider = new AdminTokenProvider(client, "authUrl", "user", "pass");
 
       String adminToken = provider.getAdminToken();

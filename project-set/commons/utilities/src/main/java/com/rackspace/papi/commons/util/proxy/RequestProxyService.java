@@ -10,9 +10,9 @@ public interface RequestProxyService {
 
     int proxyRequest(String targetHost, HttpServletRequest request, HttpServletResponse response) throws IOException;
     void setRewriteHostHeader(boolean value);
-    ServiceClientResponse get(String uri, Map<String, String> headers);
-    ServiceClientResponse get(String baseUri, String extraUri, Map<String, String> headers);
-    ServiceClientResponse delete(String baseUri, String extraUri, Map<String, String> headers);
-    ServiceClientResponse put(String uri, Map<String, String> headers, byte[] body);
-    ServiceClientResponse put(String baseUri, String path, Map<String, String> headers, byte[] body);
+    <E> ServiceClientResponse<E> get(String uri, Map<String, String> headers);
+    <E> ServiceClientResponse<E> get(String baseUri, String extraUri, Map<String, String> headers);
+    <E> ServiceClientResponse<E> delete(String baseUri, String extraUri, Map<String, String> headers);
+    <E> ServiceClientResponse<E> put(String uri, Map<String, String> headers, byte[] body);
+    <E> ServiceClientResponse<E> put(String baseUri, String path, Map<String, String> headers, byte[] body);
 }

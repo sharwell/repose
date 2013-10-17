@@ -22,7 +22,7 @@ public class ExceptionLogger {
     }
 
     public <T extends Exception> T newException(String message, Throwable cause, Class<T> exceptionClass) {
-        Throwable newExceptionInstance;
+        T newExceptionInstance;
 
         if (cause == null) {
             newExceptionInstance = ReflectionTools.construct(exceptionClass, message);
@@ -32,6 +32,6 @@ public class ExceptionLogger {
 
         loggerRef.error(message, cause) ;
 
-        return (T) newExceptionInstance;
+        return newExceptionInstance;
     }
 }

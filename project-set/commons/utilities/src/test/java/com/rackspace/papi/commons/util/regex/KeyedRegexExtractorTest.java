@@ -24,7 +24,7 @@ public class KeyedRegexExtractorTest {
          final String pattern = "a([^z]+)z";
          extractor.addPattern(pattern, expectedKey);
 
-         ExtractorResult result = extractor.extract("abcdz");
+         ExtractorResult<Object> result = extractor.extract("abcdz");
          assertEquals("Extractor should always return the first capture group when find(...) returns true", "bcd", result.getResult());
          assertEquals("Extractor should return matched key", expectedKey, result.getKey());
       }
@@ -36,7 +36,7 @@ public class KeyedRegexExtractorTest {
          final String pattern = "a([^z]+)z";
          extractor.addPattern(pattern);
 
-         ExtractorResult result = extractor.extract("abcdz");
+         ExtractorResult<Object> result = extractor.extract("abcdz");
          assertEquals("Extractor should always return the first capture group when find(...) returns true", "bcd", result.getResult());
          assertNull("Extractor should return null keys when patterns are added without them", result.getKey());
       }
@@ -50,7 +50,7 @@ public class KeyedRegexExtractorTest {
          extractor.addPattern(pattern, expectedKey);
          
 
-         ExtractorResult result = extractor.extract("http://n01.repose.org/servers/-384904");
+         ExtractorResult<Object> result = extractor.extract("http://n01.repose.org/servers/-384904");
          assertEquals("Extractor should always return the first capture group when find(...) returns true", "-384904", result.getResult());
          assertEquals("Extractor should return matched key", expectedKey, result.getKey());
       }
