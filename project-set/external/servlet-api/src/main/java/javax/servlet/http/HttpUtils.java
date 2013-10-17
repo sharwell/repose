@@ -71,6 +71,7 @@ import java.util.StringTokenizer;
  *			to the request interfaces.
  *
  */
+@Deprecated
 public class HttpUtils {
 
     private static final String LSTRING_FILE =

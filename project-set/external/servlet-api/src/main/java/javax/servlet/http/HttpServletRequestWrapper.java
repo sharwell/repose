@@ -313,6 +313,7 @@ public class HttpServletRequestWrapper extends ServletRequestWrapper implements 
      * on the wrapped request object.
      */
     @Override
+    @Deprecated
     public boolean isRequestedSessionIdFromUrl() {
         return this._getHttpServletRequest().isRequestedSessionIdFromUrl();
     }

@@ -710,7 +710,7 @@ public interface HttpServletRequest extends ServletRequest {
      *				instead.
      *
      */
-
+    @Deprecated
     public boolean isRequestedSessionIdFromUrl();
 
 

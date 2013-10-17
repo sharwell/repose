@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
  * @author zinic
  */
 @RunWith(Enclosed.class)
+@Deprecated
 public class QualityFactorUtilityTest {
 
    public static class WhenChoosingHeaderValuesByQuality {

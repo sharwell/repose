@@ -46,6 +46,7 @@ public class HeaderManagerImplTest {
         }
 
         @Test
+        @Deprecated
         public void shouldAppendWhenHeaderAlreadyPresent() {
             when(mockRequest.getHeader(PowerApiHeader.USER.toString())).thenReturn("127.0.0.0;q=.3");
 
@@ -57,6 +58,7 @@ public class HeaderManagerImplTest {
         }
 
         @Test
+        @Deprecated
         public void shouldPutHeaderWhenHeaderNotPresent() {
             when(mockRequest.getHeader(PowerApiHeader.USER.toString())).thenReturn(null);
 

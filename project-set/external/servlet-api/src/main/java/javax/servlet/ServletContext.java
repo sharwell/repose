@@ -450,6 +450,7 @@ public interface ServletContext {
      * <code>ServletContext</code> class and can perform shared business logic
      * by invoking methods on common non-servlet classes.
      */
+    @Deprecated
     public Servlet getServlet(String name) throws ServletException;
     
 
@@ -464,6 +465,7 @@ public interface ServletContext {
      * will be permanently removed in a future version of the Java
      * Servlet API.
      */
+    @Deprecated
     public Enumeration<Servlet> getServlets();
     
 
@@ -477,6 +479,7 @@ public interface ServletContext {
      * remains only to preserve binary compatibility. This method will 
      * be permanently removed in a future version of the Java Servlet API.
      */
+    @Deprecated
     public Enumeration<String> getServletNames();
     
 
@@ -501,6 +504,7 @@ public interface ServletContext {
      * exception's stack trace and an explanatory error message
      * to the servlet log file.
      */
+    @Deprecated
     public void log(Exception exception, String msg);
     
 

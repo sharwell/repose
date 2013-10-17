@@ -158,6 +158,7 @@ public interface HttpServletResponse extends ServletResponse {
      * 			the unchanged URL otherwise.
      */
 
+    @Deprecated
     public String encodeUrl(String url);
     
     /**
@@ -169,6 +170,7 @@ public interface HttpServletResponse extends ServletResponse {
      * 			the unchanged URL otherwise.
      */
 
+    @Deprecated
     public String encodeRedirectUrl(String url);
 
     /**
@@ -379,6 +381,7 @@ public interface HttpServletResponse extends ServletResponse {
      * @param	sc	the status code
      * @param	sm	the status message
      */
+    @Deprecated
     public void setStatus(int sc, String sm);
 
 

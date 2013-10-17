@@ -113,6 +113,7 @@ public class HeaderManagerImpl implements HeaderManager {
   }
 
   @Override
+  @Deprecated
   public void appendToHeader(HttpServletRequest request, String key, String value) {
     final String currentHeaderValue = request.getHeader(key);
 

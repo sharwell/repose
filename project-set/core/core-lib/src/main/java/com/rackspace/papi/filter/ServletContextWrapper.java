@@ -189,16 +189,19 @@ public class ServletContextWrapper implements ServletContext {
     }
 
     @Override
+    @Deprecated
     public Servlet getServlet(String name) throws ServletException {
         return context.getServlet(name);
     }
 
     @Override
+    @Deprecated
     public Enumeration<Servlet> getServlets() {
         return context.getServlets();
     }
 
     @Override
+    @Deprecated
     public Enumeration<String> getServletNames() {
         return context.getServletNames();
     }
@@ -209,6 +212,7 @@ public class ServletContextWrapper implements ServletContext {
     }
 
     @Override
+    @Deprecated
     public void log(Exception exception, String msg) {
         context.log(exception, msg);
     }

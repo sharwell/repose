@@ -213,6 +213,7 @@ public interface HttpSession {
      *			version of the Java Servlet API.
      *
      */
+    @Deprecated
     public HttpSessionContext getSessionContext();
     
 
@@ -241,6 +242,7 @@ public interface HttpSession {
      * @exception IllegalStateException	if this method is called on an
      *					invalidated session
      */
+    @Deprecated
     public Object getValue(String name);
         
 
@@ -271,6 +273,7 @@ public interface HttpSession {
      * @exception IllegalStateException	if this method is called on an
      *					invalidated session
      */
+    @Deprecated
     public String[] getValueNames();
     
 
@@ -317,6 +320,7 @@ public interface HttpSession {
      * @exception IllegalStateException	if this method is called on an
      *					invalidated session
      */
+    @Deprecated
     public void putValue(String name, Object value);
 
 
@@ -351,6 +355,7 @@ public interface HttpSession {
      * @exception IllegalStateException	if this method is called on an
      *					invalidated session
      */
+    @Deprecated
     public void removeValue(String name);
 
 

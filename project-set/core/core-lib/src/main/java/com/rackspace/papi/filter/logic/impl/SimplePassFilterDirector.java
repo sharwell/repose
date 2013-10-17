@@ -95,6 +95,7 @@ class EmptyHeaderManager implements HeaderManager {
   }
 
   @Override
+  @Deprecated
   public void appendToHeader(HttpServletRequest request, String key, String value) {
   }
 
