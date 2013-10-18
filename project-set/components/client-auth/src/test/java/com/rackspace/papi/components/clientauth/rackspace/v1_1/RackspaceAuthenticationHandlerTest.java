@@ -60,7 +60,7 @@ public class RackspaceAuthenticationHandlerTest {
         protected RackspaceAuth rackAuthConfig;
         protected List<AuthGroup> groups;
         protected AuthGroups authGroups;
-        protected KeyedRegexExtractor keyedRegexExtractor;
+        protected KeyedRegexExtractor<String> keyedRegexExtractor;
         protected List<Pattern> whiteListRegexPatterns;
         protected EndpointsConfiguration endpointsConfiguration;
 
@@ -83,7 +83,7 @@ public class RackspaceAuthenticationHandlerTest {
             rackAuthConfig = new RackspaceAuth();
             rackAuthConfig.setDelegable(delegable());
 
-            keyedRegexExtractor = new KeyedRegexExtractor();
+            keyedRegexExtractor = new KeyedRegexExtractor<String>();
 
             final AccountMapping mapping = new AccountMapping();
             mapping.setIdRegex("/start/(.*)/");
@@ -96,8 +96,8 @@ public class RackspaceAuthenticationHandlerTest {
             rackAuthConfig.getAccountMapping().add(mapping);
             rackAuthConfig.getAccountMapping().add(mapping2);
 
-            keyedRegexExtractor.addPattern(mapping.getIdRegex(), mapping.getType());
-            keyedRegexExtractor.addPattern(mapping2.getIdRegex(), mapping2.getType());
+            keyedRegexExtractor.addPattern(mapping.getIdRegex(), mapping.getType().name());
+            keyedRegexExtractor.addPattern(mapping2.getIdRegex(), mapping2.getType().name());
 
             final AuthenticationServer authenticationServer = new AuthenticationServer();
             authenticationServer.setUri("http://some.auth.endpoint");
@@ -186,6 +186,7 @@ public class RackspaceAuthenticationHandlerTest {
         }
 
         @Test
+        @SuppressWarnings("unchecked") // mocking
         public void shouldRejectInvalidCredentials() {
             when(request.getHeader(anyString())).thenReturn("some-random-auth-token");
             when(request.getRequestURI()).thenReturn("/start/accountId/resource");
@@ -198,6 +199,7 @@ public class RackspaceAuthenticationHandlerTest {
         }
 
         @Test
+        @SuppressWarnings("unchecked") // mocking
         public void shouldPassValidCredentials() {
             String tokenId = "some-random-auth-token";
             String userName = "userName";
@@ -248,6 +250,7 @@ public class RackspaceAuthenticationHandlerTest {
         }
 
         @Test
+        @SuppressWarnings("unchecked") // mocking
         public void shouldHandleAuthenticationServiceFailures() {
             when(request.getHeader(anyString())).thenReturn("some-random-auth-token");
             when(request.getRequestURI()).thenReturn("/start/accountId/resource");
@@ -293,6 +296,7 @@ public class RackspaceAuthenticationHandlerTest {
         }
 
         @Test
+        @SuppressWarnings("unchecked") // mocking
         public void shouldRejectInvalidCredentials() {
             when(request.getHeader(anyString())).thenReturn("some-random-auth-token");
             when(request.getRequestURI()).thenReturn("/start/accountId/resource");
@@ -305,6 +309,7 @@ public class RackspaceAuthenticationHandlerTest {
         }
 
         @Test
+        @SuppressWarnings("unchecked") // mocking
         public void shouldPassValidCredentials() {
             String tokenId = "some-random-auth-token";
             String userName = "userName";

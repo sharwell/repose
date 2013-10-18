@@ -81,7 +81,7 @@ public class OpenStackAuthenticationHandlerTest {
         protected OpenStackAuthenticationHandler handler;
         protected OpenStackAuthenticationHandler handlerWithCache;
         protected OpenstackAuth osauthConfig;
-        protected KeyedRegexExtractor keyedRegexExtractor;
+        protected KeyedRegexExtractor<String> keyedRegexExtractor;
         protected Datastore store;
         protected List<Pattern> whiteListRegexPatterns;
         protected EndpointsConfiguration endpointsConfiguration;
@@ -95,7 +95,7 @@ public class OpenStackAuthenticationHandlerTest {
             osauthConfig.setDelegable(delegable());
             osauthConfig.setTenanted(isTenanted());
 
-            keyedRegexExtractor = new KeyedRegexExtractor();
+            keyedRegexExtractor = new KeyedRegexExtractor<String>();
 
             final ClientMapping mapping = new ClientMapping();
             mapping.setIdRegex("/start/([^/]*)/");

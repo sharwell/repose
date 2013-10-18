@@ -26,7 +26,7 @@ public final class OpenStackAuthenticationHandlerFactory {
     private OpenStackAuthenticationHandlerFactory() {
     }
 
-    public static AuthenticationHandler newInstance(ClientAuthConfig config, KeyedRegexExtractor accountRegexExtractor, Datastore datastore, UriMatcher uriMatcher,HttpClientService httpClientService) {
+    public static AuthenticationHandler newInstance(ClientAuthConfig config, KeyedRegexExtractor<String> accountRegexExtractor, Datastore datastore, UriMatcher uriMatcher,HttpClientService<?> httpClientService) {
         final AuthTokenCache cache = new AuthTokenCache(datastore, OsAuthCachePrefix.TOKEN.toString());
         final AuthGroupCache grpCache = new AuthGroupCache(datastore, OsAuthCachePrefix.GROUP.toString());
         final AuthUserCache usrCache = new AuthUserCache(datastore, OsAuthCachePrefix.USER.toString());

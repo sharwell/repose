@@ -20,7 +20,7 @@ public final class RackspaceAuthenticationHandlerFactory {
     private RackspaceAuthenticationHandlerFactory() {
     }
 
-    public static AuthenticationHandler newInstance(ClientAuthConfig cfg, KeyedRegexExtractor accountRegexExtractor, Datastore datastore, UriMatcher uriMatcher,HttpClientService httpClientService) {
+    public static AuthenticationHandler newInstance(ClientAuthConfig cfg, KeyedRegexExtractor<String> accountRegexExtractor, Datastore datastore, UriMatcher uriMatcher,HttpClientService<?> httpClientService) {
         final RackspaceAuth authConfig = cfg.getRackspaceAuth();
         final AuthTokenCache cache = new AuthTokenCache(datastore, RsAuthCachePrefix.TOKEN.toString());
         final AuthGroupCache grpCache = new AuthGroupCache(datastore, RsAuthCachePrefix.GROUP.toString());

@@ -43,11 +43,11 @@ public class ClientAuthenticationHandlerFactory extends AbstractConfiguredFilter
     private UriMatcher uriMatcher;
     private final Datastore datastore;
     private FeedListenerManager manager;
-    private final  HttpClientService  httpClientService;
+    private final HttpClientService<?> httpClientService;
     private static final Long MINIMUM_INTERVAL = new Long("10000");
 
 
-    public ClientAuthenticationHandlerFactory(Datastore datastore,HttpClientService httpClientService) {
+    public ClientAuthenticationHandlerFactory(Datastore datastore,HttpClientService<?> httpClientService) {
         this.datastore = datastore;
         this.httpClientService= httpClientService;
     }

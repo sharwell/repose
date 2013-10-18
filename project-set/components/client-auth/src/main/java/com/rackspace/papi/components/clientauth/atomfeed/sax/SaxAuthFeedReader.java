@@ -64,7 +64,7 @@ public class SaxAuthFeedReader extends DefaultHandler implements AuthFeedReader 
    public CacheKeys getCacheKeys() {
 
       moreData = true;
-      ServiceClientResponse resp;
+      ServiceClientResponse<?> resp;
       resultKeys = new FeedCacheKeys();
       while (moreData) {
 
@@ -89,9 +89,9 @@ public class SaxAuthFeedReader extends DefaultHandler implements AuthFeedReader 
       return resultKeys;
    }
 
-   private ServiceClientResponse getFeed() {
+   private ServiceClientResponse<?> getFeed() {
 
-      ServiceClientResponse resp;
+      ServiceClientResponse<?> resp;
       final Map<String, String> headers = new HashMap<String, String>();
 
       if (isAuthed) {

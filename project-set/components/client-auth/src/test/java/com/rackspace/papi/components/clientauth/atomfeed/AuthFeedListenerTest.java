@@ -18,17 +18,19 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.Configuration;
+import net.sf.ehcache.config.PersistenceConfiguration;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import org.openstack.docs.identity.api.v2.AuthenticateResponse;
@@ -59,7 +61,7 @@ public class AuthFeedListenerTest {
 
       Configuration defaultConfiguration = new Configuration();
       defaultConfiguration.setName("TestCacheManager");
-      defaultConfiguration.setDefaultCacheConfiguration(new CacheConfiguration().diskPersistent(false));
+      defaultConfiguration.setDefaultCacheConfiguration(new CacheConfiguration().persistence(new PersistenceConfiguration().strategy(PersistenceConfiguration.Strategy.NONE)));
       defaultConfiguration.setUpdateCheck(false);
 
       cacheManager = CacheManager.newInstance(defaultConfiguration);
@@ -105,7 +107,11 @@ public class AuthFeedListenerTest {
       Token token = new Token();
       token.setId("tokenid");
       GregorianCalendar cal = new GregorianCalendar(2013, 11, 12);
-      token.setExpires(new XMLGregorianCalendarImpl(cal));
+      try {
+         token.setExpires(DatatypeFactory.newInstance().newXMLGregorianCalendar(cal));
+      } catch (DatatypeConfigurationException ex) {
+         throw new UnsupportedOperationException("Could not set token expiration", ex);
+      }
       TenantForAuthenticateResponse tenantForAuthenticateResponse = new TenantForAuthenticateResponse();
       tenantForAuthenticateResponse.setId("tenantId");
       tenantForAuthenticateResponse.setName("tenantName");

@@ -45,7 +45,7 @@ public class AdminTokenProvider {
       credentials.setUsername(username);
       credentials.setPassword(password);
 
-      JAXBElement jaxbCredentials = factory.createPasswordCredentials(credentials);
+      JAXBElement<PasswordCredentialsRequiredUsername> jaxbCredentials = factory.createPasswordCredentials(credentials);
 
       AuthenticationRequest request = new AuthenticationRequest();
       request.setCredential(jaxbCredentials);

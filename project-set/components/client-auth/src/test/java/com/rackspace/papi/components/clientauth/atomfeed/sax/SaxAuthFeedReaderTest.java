@@ -21,7 +21,7 @@ import static org.mockito.Matchers.*;
 public class SaxAuthFeedReaderTest {
 
    private ServiceClient client;
-   private ServiceClientResponse resp1, resp2, resp3;
+   private ServiceClientResponse<?> resp1, resp2, resp3;
    private SaxAuthFeedReader reader;
 
    @Before
@@ -33,9 +33,9 @@ public class SaxAuthFeedReaderTest {
 
       FilePathReaderImpl fileReader1 = new FilePathReaderImpl(File.separator + "META-INF" + File.separator + "feed.xml");
       FilePathReaderImpl fileReader2 = new FilePathReaderImpl(File.separator + "META-INF" + File.separator + "empty-feed.xml");
-      resp1 = new ServiceClientResponse(200, fileReader1.getResourceAsStream());
+      resp1 = new ServiceClientResponse<Object>(200, fileReader1.getResourceAsStream());
 
-      resp2 = new ServiceClientResponse(200, fileReader2.getResourceAsStream());
+      resp2 = new ServiceClientResponse<Object>(200, fileReader2.getResourceAsStream());
    }
 
    @After
@@ -44,6 +44,7 @@ public class SaxAuthFeedReaderTest {
    }
 
    @Test
+   @SuppressWarnings("unchecked") // mocking
    public void shouldRetrieveUserAndTokenKeysFromAtomFeed() {
 
       when(client.get(eq("http://some.junit.test.feed/at/somepath"), anyMap())).thenReturn(resp1);
@@ -60,9 +61,10 @@ public class SaxAuthFeedReaderTest {
    }
 
    @Test
+   @SuppressWarnings("unchecked") // mocking
    public void shouldLogUnauthorizedFeeds() {
 
-      resp3 = new ServiceClientResponse(401, null);
+      resp3 = new ServiceClientResponse<Object>(401, null);
       when(client.get(eq("http://some.junit.test.feed/at/somepath"), anyMap())).thenReturn(resp3);
       reader = new SaxAuthFeedReader(client, "http://some.junit.test.feed/at/somepath", "atomId");
 
@@ -75,9 +77,10 @@ public class SaxAuthFeedReaderTest {
    }
 
    @Test
+   @SuppressWarnings("unchecked") // mocking
    public void shouldLogServerErrorFromAtomFeeds() {
 
-      resp3 = new ServiceClientResponse(503, null);
+      resp3 = new ServiceClientResponse<Object>(503, null);
       when(client.get(eq("http://some.junit.test.feed/at/somepath"), anyMap())).thenReturn(resp3);
       reader = new SaxAuthFeedReader(client, "http://some.junit.test.feed/at/somepath", "atomId");
 

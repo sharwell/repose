@@ -6,7 +6,6 @@ package com.rackspace.papi.components.clientauth.atomfeed.sax;
 
 import com.rackspace.papi.commons.util.http.ServiceClient;
 import com.rackspace.papi.commons.util.http.ServiceClientResponse;
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,9 +15,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -31,7 +31,6 @@ import org.openstack.docs.identity.api.v2.TenantForAuthenticateResponse;
 import org.openstack.docs.identity.api.v2.Token;
 import org.openstack.docs.identity.api.v2.UserForAuthenticateResponse;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.*;
@@ -78,7 +77,11 @@ public class AdminTokenProviderTest {
       Token token = new Token();
       token.setId("tokenid");
       GregorianCalendar cal = new GregorianCalendar(2013, 11, 12);
-      token.setExpires(new XMLGregorianCalendarImpl(cal));
+      try {
+         token.setExpires(DatatypeFactory.newInstance().newXMLGregorianCalendar(cal));
+      } catch (DatatypeConfigurationException ex) {
+         throw new UnsupportedOperationException("Could not set token expiration", ex);
+      }
       TenantForAuthenticateResponse tenantForAuthenticateResponse = new TenantForAuthenticateResponse();
       tenantForAuthenticateResponse.setId("tenantId");
       tenantForAuthenticateResponse.setName("tenantName");

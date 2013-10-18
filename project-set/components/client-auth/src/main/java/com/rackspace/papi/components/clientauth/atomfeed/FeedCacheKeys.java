@@ -15,7 +15,7 @@ public class FeedCacheKeys implements CacheKeys {
    private Map<CacheKeyType, Set<String>> keys;
 
    public FeedCacheKeys() {
-      keys = new EnumMap(CacheKeyType.class);
+      keys = new EnumMap<CacheKeyType, Set<String>>(CacheKeyType.class);
       for(CacheKeyType type: CacheKeyType.values()){
          keys.put(type, new HashSet<String>());
       }
