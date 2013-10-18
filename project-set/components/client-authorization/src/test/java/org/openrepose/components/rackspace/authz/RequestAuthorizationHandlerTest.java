@@ -68,7 +68,7 @@ public class RequestAuthorizationHandlerTest {
             endpointList.add(endpoint);
 
             mockedAuthService = mock(AuthenticationService.class);
-            when(mockedAuthService.getEndpointsForToken(UNAUTHORIZED_TOKEN)).thenReturn(Collections.EMPTY_LIST);
+            when(mockedAuthService.getEndpointsForToken(UNAUTHORIZED_TOKEN)).thenReturn(Collections.<Endpoint>emptyList());
             when(mockedAuthService.getEndpointsForToken(AUTHORIZED_TOKEN)).thenReturn(endpointList);
             when(mockedAuthService.getEndpointsForToken(CACHED_TOKEN)).thenReturn(endpointList);
 
@@ -143,7 +143,7 @@ public class RequestAuthorizationHandlerTest {
 
             verify(mockedCache, times(1)).getCachedEndpointsForToken(AUTHORIZED_TOKEN);
             verify(mockedAuthService, times(1)).getEndpointsForToken(AUTHORIZED_TOKEN);
-            verify(mockedCache, times(1)).cacheEndpointsForToken(eq(AUTHORIZED_TOKEN), any(List.class));
+            verify(mockedCache, times(1)).cacheEndpointsForToken(eq(AUTHORIZED_TOKEN), anyListOf(CachedEndpoint.class));
         }
 
         @Test
@@ -153,7 +153,7 @@ public class RequestAuthorizationHandlerTest {
 
             verify(mockedCache, times(1)).getCachedEndpointsForToken(CACHED_TOKEN);
             verify(mockedAuthService, never()).getEndpointsForToken(CACHED_TOKEN);
-            verify(mockedCache, never()).cacheEndpointsForToken(eq(AUTHORIZED_TOKEN), any(List.class));
+            verify(mockedCache, never()).cacheEndpointsForToken(eq(AUTHORIZED_TOKEN), anyListOf(CachedEndpoint.class));
         }
     }
 }

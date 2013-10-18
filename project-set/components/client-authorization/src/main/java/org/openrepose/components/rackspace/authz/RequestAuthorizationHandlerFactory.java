@@ -22,9 +22,9 @@ public class RequestAuthorizationHandlerFactory extends AbstractConfiguredFilter
     private final Datastore datastore;
     private RackspaceAuthorization authorizationConfiguration;
     private AuthenticationService authenticationService;
-    private HttpClientService httpClientService;
+    private HttpClientService<?> httpClientService;
 
-    public RequestAuthorizationHandlerFactory(Datastore datastore,HttpClientService httpClientService) {
+    public RequestAuthorizationHandlerFactory(Datastore datastore,HttpClientService<?> httpClientService) {
         this.datastore = datastore;
         this.httpClientService=httpClientService ;
     }

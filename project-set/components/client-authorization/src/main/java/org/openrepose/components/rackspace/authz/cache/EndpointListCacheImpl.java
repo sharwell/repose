@@ -40,7 +40,7 @@ public class EndpointListCacheImpl implements EndpointListCache {
    @Override
    public void cacheEndpointsForToken(String token, List<CachedEndpoint> endpoints) throws IOException {
       // If the list passed is not serializable then copy it into a serializable list
-      final Serializable serializable = endpoints instanceof Serializable ? (Serializable) endpoints : new LinkedList(endpoints);
+      final Serializable serializable = endpoints instanceof Serializable ? (Serializable) endpoints : new LinkedList<CachedEndpoint>(endpoints);
       final String cacheName = getCacheNameForToken(token);
 
       cacheInstance.put(cacheName, ObjectSerializer.instance().writeObject(serializable), ttlInSeconds, TimeUnit.SECONDS);
