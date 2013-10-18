@@ -44,7 +44,7 @@ public class ResponseMessagingMarshaller implements ReposeMarshaller {
    }
 
    @Override
-   public JAXBElement<?> unmarshal(String configurationRoot) throws FileNotFoundException, JAXBException {
+   public JAXBElement<ResponseMessagingConfiguration> unmarshal(String configurationRoot) throws FileNotFoundException, JAXBException {
       return (JAXBElement<ResponseMessagingConfiguration>) jaxbContext.createUnmarshaller().unmarshal(new File(configurationRoot + ReposeConfiguration.RMS.getConfigFilename()));
    }
 }

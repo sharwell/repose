@@ -44,7 +44,7 @@ public class ContainerMarshaller implements ReposeMarshaller {
    }
 
    @Override
-   public JAXBElement<?> unmarshal(String configurationRoot) throws FileNotFoundException, JAXBException {
+   public JAXBElement<ContainerConfiguration> unmarshal(String configurationRoot) throws FileNotFoundException, JAXBException {
       return (JAXBElement<ContainerConfiguration>) jaxbContext.createUnmarshaller().unmarshal(new File(configurationRoot + ReposeConfiguration.CONTAINER.getConfigFilename()));
    }
 }

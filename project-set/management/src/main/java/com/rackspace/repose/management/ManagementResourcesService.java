@@ -119,7 +119,7 @@ public class ManagementResourcesService {
         JAXBElement<ContainerConfiguration> config = null;
 
         try {
-            config = (JAXBElement<ContainerConfiguration>) new ContainerMarshaller().unmarshal(REPOSE_CONFIG_DIRECTORY);
+            config = new ContainerMarshaller().unmarshal(REPOSE_CONFIG_DIRECTORY);
         } catch (JAXBException e) {
             LOG.error("Problem unmarshalling container configuration", e);
         } catch (FileNotFoundException e) {
@@ -153,7 +153,7 @@ public class ManagementResourcesService {
         JAXBElement<SystemModel> config = null;
 
         try {
-            config = (JAXBElement<SystemModel>) new SystemModelMarshaller().unmarshal(REPOSE_CONFIG_DIRECTORY);
+            config = new SystemModelMarshaller().unmarshal(REPOSE_CONFIG_DIRECTORY);
         } catch (JAXBException e) {
             LOG.error("Problem unmarshalling system configuration", e);
         } catch (FileNotFoundException e) {
@@ -187,7 +187,7 @@ public class ManagementResourcesService {
         JAXBElement<ResponseMessagingConfiguration> config = null;
 
         try {
-            config = (JAXBElement<ResponseMessagingConfiguration>) new ResponseMessagingMarshaller().unmarshal(REPOSE_CONFIG_DIRECTORY);
+            config = new ResponseMessagingMarshaller().unmarshal(REPOSE_CONFIG_DIRECTORY);
         } catch (JAXBException e) {
             LOG.error("Problem unmarshalling response messaging configuration", e);
         } catch (FileNotFoundException e) {
@@ -255,7 +255,7 @@ public class ManagementResourcesService {
         JAXBElement<ServiceVersionMappingList> config = null;
 
         try {
-            config = (JAXBElement<ServiceVersionMappingList>) new VersioningMarshaller().unmarshal(REPOSE_CONFIG_DIRECTORY);
+            config = new VersioningMarshaller().unmarshal(REPOSE_CONFIG_DIRECTORY);
         } catch (JAXBException e) {
             LOG.error("Problem unmarshalling versioning configuration", e);
         } catch (FileNotFoundException e) {

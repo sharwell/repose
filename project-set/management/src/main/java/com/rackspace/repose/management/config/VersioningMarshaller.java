@@ -45,7 +45,7 @@ public class VersioningMarshaller implements ReposeMarshaller {
     }
 
     @Override
-    public JAXBElement<?> unmarshal(String configurationRoot) throws FileNotFoundException, JAXBException {
+    public JAXBElement<ServiceVersionMappingList> unmarshal(String configurationRoot) throws FileNotFoundException, JAXBException {
         return (JAXBElement<ServiceVersionMappingList>) jaxbContext.createUnmarshaller()
                 .unmarshal(new File(configurationRoot + ReposeConfiguration.VERSIONING.getConfigFilename()));
 

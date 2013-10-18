@@ -44,7 +44,7 @@ public class SystemModelMarshaller implements ReposeMarshaller {
    }
 
    @Override
-   public JAXBElement<?> unmarshal(String configurationRoot) throws FileNotFoundException, JAXBException {
+   public JAXBElement<SystemModel> unmarshal(String configurationRoot) throws FileNotFoundException, JAXBException {
       return (JAXBElement<SystemModel>) jaxbContext.createUnmarshaller().unmarshal(new File(configurationRoot + ReposeConfiguration.SYSTEM.getConfigFilename()));
    }
 }
