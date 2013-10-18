@@ -29,6 +29,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import org.openrepose.repose.httpx.v1.Headers;
+import org.openrepose.repose.httpx.v1.QueryParameters;
+import org.openrepose.repose.httpx.v1.RequestInformation;
 
 public class TranslationHandler extends AbstractFilterLogicHandler {
 
@@ -76,21 +80,21 @@ public class TranslationHandler extends AbstractFilterLogicHandler {
     RESPONSE
   }
 
-  private List<XsltParameter> getInputParameters(final TranslationType type, final MutableHttpServletRequest request, final MutableHttpServletResponse response, final TranslationResult lastResult) {
-    List<XsltParameter> inputs = new ArrayList<XsltParameter>();
-    inputs.add(new XsltParameter("request", request));
-    inputs.add(new XsltParameter("response", response));
-    inputs.add(new XsltParameter("requestId", request.getRequestId()));
-    inputs.add(new XsltParameter("responseId", response.getResponseId()));
+  private List<XsltParameter<?>> getInputParameters(final TranslationType type, final MutableHttpServletRequest request, final MutableHttpServletResponse response, final TranslationResult lastResult) {
+    List<XsltParameter<?>> inputs = new ArrayList<XsltParameter<?>>();
+    inputs.add(new XsltParameter<HttpServletRequest>("request", request));
+    inputs.add(new XsltParameter<HttpServletResponse>("response", response));
+    inputs.add(new XsltParameter<String>("requestId", request.getRequestId()));
+    inputs.add(new XsltParameter<String>("responseId", response.getResponseId()));
     if (lastResult != null) {
       if (lastResult.getRequestInfo() != null) {
-        inputs.add(new XsltParameter("requestInfo", lastResult.getRequestInfo()));
+        inputs.add(new XsltParameter<RequestInformation>("requestInfo", lastResult.getRequestInfo()));
       }
       if (lastResult.getHeaders() != null) {
-        inputs.add(new XsltParameter("headers", lastResult.getHeaders()));
+        inputs.add(new XsltParameter<Headers>("headers", lastResult.getHeaders()));
       }
       if (lastResult.getQueryParameters() != null) {
-        inputs.add(new XsltParameter("queryParams", lastResult.getQueryParameters()));
+        inputs.add(new XsltParameter<QueryParameters>("queryParams", lastResult.getQueryParameters()));
       }
     }
 
@@ -101,12 +105,12 @@ public class TranslationHandler extends AbstractFilterLogicHandler {
       id = response.getResponseId();
     }
     /* Input/Output URIs */
-    inputs.add(new XsltParameter("input-headers-uri", "repose:input:headers:" + id));
-    inputs.add(new XsltParameter("input-query-uri", "repose:input:query:" + id));
-    inputs.add(new XsltParameter("input-request-uri", "repose:input:request:" + id));
-    inputs.add(new XsltParameter("output-headers-uri", "repose:output:headers.xml"));
-    inputs.add(new XsltParameter("output-query-uri", "repose:output:query.xml"));
-    inputs.add(new XsltParameter("output-request-uri", "repose:output:request.xml"));
+    inputs.add(new XsltParameter<String>("input-headers-uri", "repose:input:headers:" + id));
+    inputs.add(new XsltParameter<String>("input-query-uri", "repose:input:query:" + id));
+    inputs.add(new XsltParameter<String>("input-request-uri", "repose:input:request:" + id));
+    inputs.add(new XsltParameter<String>("output-headers-uri", "repose:output:headers.xml"));
+    inputs.add(new XsltParameter<String>("output-query-uri", "repose:output:query.xml"));
+    inputs.add(new XsltParameter<String>("output-request-uri", "repose:output:request.xml"));
 
     return inputs;
   }

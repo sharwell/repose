@@ -28,9 +28,9 @@ public class XmlChainPool {
   private final Pattern statusRegex;
   private boolean allMethods;
   private final List<HttpMethod> httpMethods;
-  private final List<XsltParameter> params;
+  private final List<? extends XsltParameter<?>> params;
 
-  public XmlChainPool(String contentType, String accept, List<HttpMethod> httpMethods, String statusRegex, String resultContentType, List<XsltParameter> params, Pool<XmlFilterChain> pool) {
+  public XmlChainPool(String contentType, String accept, List<HttpMethod> httpMethods, String statusRegex, String resultContentType, List<? extends XsltParameter<?>> params, Pool<XmlFilterChain> pool) {
     this.contentType = contentType;
     this.acceptAllContentTypes = StringUtilities.nullSafeEqualsIgnoreCase(this.contentType, MimeType.WILDCARD.getMimeType());
     this.accept = accept;
@@ -76,8 +76,8 @@ public class XmlChainPool {
     return outputs;
   }
 
-  public TranslationResult executePool(final InputStream in, final OutputStream out, final List<XsltParameter> inputs) {
-    TranslationResult result = (TranslationResult) getPool().use(new ResourceContext<XmlFilterChain, TranslationResult>() {
+  public TranslationResult executePool(final InputStream in, final OutputStream out, final List<XsltParameter<?>> inputs) {
+    TranslationResult result = getPool().use(new ResourceContext<XmlFilterChain, TranslationResult>() {
       @Override
       public TranslationResult perform(XmlFilterChain chain) {
 
@@ -118,7 +118,7 @@ public class XmlChainPool {
     return statusRegex;
   }
 
-  public List<XsltParameter> getParams() {
+  public List<? extends XsltParameter<?>> getParams() {
     return params;
   }
 }

@@ -145,7 +145,7 @@ public class HttpxMarshaller {
       SAXSource source = new SAXSource(xmlReader, new InputSource(xml));
       Object result = getUnmarshaller().unmarshal(source);
       if (result instanceof JAXBElement) {
-        JAXBElement element = (JAXBElement) result;
+        JAXBElement<?> element = (JAXBElement<?>) result;
         return (T) element.getValue();
       }
       return (T) result;

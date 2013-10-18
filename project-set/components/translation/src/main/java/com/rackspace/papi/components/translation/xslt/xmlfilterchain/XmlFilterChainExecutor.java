@@ -73,7 +73,7 @@ public class XmlFilterChainExecutor {
     return null;
   }
 
-  protected void setInputParameters(String id, Transformer transformer, List<XsltParameter> inputs) {
+  protected void setInputParameters(String id, Transformer transformer, List<XsltParameter<?>> inputs) {
 
     SourceUriResolverChain resolverChain = getResolverChain(transformer);
     InputStreamUriParameterResolver resolver = resolverChain.getResolverOfType(InputStreamUriParameterResolver.class);
@@ -84,7 +84,7 @@ public class XmlFilterChainExecutor {
       HttpxUriInputParameterResolver headersResolver = resolverChain.getResolverOfType(HttpxUriInputParameterResolver.class);
       headersResolver.reset();
 
-      for (XsltParameter input : inputs) {
+      for (XsltParameter<?> input : inputs) {
         if ("*".equals(input.getStyleId()) || id != null && id.equals(input.getStyleId())) {
           String param = null;
           if (input.getValue() instanceof InputStream) {
@@ -128,7 +128,7 @@ public class XmlFilterChainExecutor {
     }
   }
 
-  public void executeChain(InputStream in, OutputStream output, List<XsltParameter> inputs, List<XsltParameter<? extends OutputStream>> outputs) throws XsltException {
+  public void executeChain(InputStream in, OutputStream output, List<XsltParameter<?>> inputs, List<XsltParameter<? extends OutputStream>> outputs) throws XsltException {
     try {
       for (XmlFilterReference filter : chain.getFilters()) {
         // pass the input stream to all transforms as a param inputstream

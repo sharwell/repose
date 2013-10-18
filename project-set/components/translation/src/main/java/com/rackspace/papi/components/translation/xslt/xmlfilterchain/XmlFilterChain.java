@@ -26,7 +26,7 @@ public class XmlFilterChain {
         return filters;
     }
 
-    public void executeChain(InputStream in, OutputStream output, List<XsltParameter> inputs, List<XsltParameter<? extends OutputStream>> outputs) throws XsltException {
+    public void executeChain(InputStream in, OutputStream output, List<XsltParameter<?>> inputs, List<XsltParameter<? extends OutputStream>> outputs) throws XsltException {
         if (in == null || output == null) {
             return;
         }

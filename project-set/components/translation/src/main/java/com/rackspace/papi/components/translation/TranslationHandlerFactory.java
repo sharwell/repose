@@ -65,8 +65,8 @@ public class TranslationHandlerFactory extends AbstractConfiguredFilterHandlerFa
     }
   }
 
-  private List<XsltParameter> buildXslParamList(TranslationBase translation) {
-    final List<XsltParameter> params = new ArrayList<XsltParameter>();
+  private List<XsltParameter<String>> buildXslParamList(TranslationBase translation) {
+    final List<XsltParameter<String>> params = new ArrayList<XsltParameter<String>>();
     if (translation.getStyleSheets() != null) {
       for (StyleSheet sheet : translation.getStyleSheets().getStyle()) {
         for (StyleParam param : sheet.getParam()) {
@@ -110,7 +110,7 @@ public class TranslationHandlerFactory extends AbstractConfiguredFilterHandlerFa
 
       if (configuration.getResponseTranslations() != null) {
         for (final ResponseTranslation translation : configuration.getResponseTranslations().getResponseTranslation()) {
-          List<XsltParameter> params = buildXslParamList(translation);
+          List<XsltParameter<String>> params = buildXslParamList(translation);
           Pool<XmlFilterChain> pool = buildChainPool(translation);
 
           responseProcessorPools.add(new XmlChainPool(
@@ -127,7 +127,7 @@ public class TranslationHandlerFactory extends AbstractConfiguredFilterHandlerFa
       if (configuration.getRequestTranslations() != null) {
         for (final RequestTranslation translation : configuration.getRequestTranslations().getRequestTranslation()) {
 
-          List<XsltParameter> params = buildXslParamList(translation);
+          List<XsltParameter<String>> params = buildXslParamList(translation);
           Pool<XmlFilterChain> pool = buildChainPool(translation);
 
           requestProcessorPools.add(new XmlChainPool(

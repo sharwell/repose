@@ -76,7 +76,7 @@ public class XsltFilterChainBuilderTest {
 
         @Test
         public void shouldUseInputOutputStreams() {
-            List<XsltParameter> inputs = new ArrayList<XsltParameter>();
+            List<XsltParameter<?>> inputs = new ArrayList<XsltParameter<?>>();
 
             List<XsltParameter<? extends OutputStream>> outputs = new ArrayList<XsltParameter<? extends OutputStream>>();
             

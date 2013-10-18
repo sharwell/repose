@@ -24,8 +24,8 @@ public class SourceUriResolverChain extends SourceUriResolver {
     
     public <T extends URIResolver> T getResolverOfType(Class<T> type) {
         for (URIResolver resolver : resolvers) {
-            if (type.isAssignableFrom(resolver.getClass())) {
-                return (T)resolver;
+            if (type.isInstance(resolver)) {
+                return type.cast(resolver);
             }
         }
         

@@ -85,8 +85,8 @@ public class TranslationHandlerTest {
             when(mockedRequest.getRequestURI()).thenReturn("/129.0.0.1/servers/");
             when(mockedRequest.getMethod()).thenReturn("POST");
             when(mockedRequest.getHeader(eq("Accept"))).thenReturn("application/xml");
-            when(mockedRequest.getHeaders(eq("accept"))).thenReturn((Enumeration) new StringTokenizer("application/xml"));
-            when(mockedRequest.getHeaderNames()).thenReturn((Enumeration) new StringTokenizer("Accept"));
+            when(mockedRequest.getHeaders(eq("accept"))).thenReturn(new StringTokenizerEnumeration(new StringTokenizer("application/xml")));
+            when(mockedRequest.getHeaderNames()).thenReturn(new StringTokenizerEnumeration(new StringTokenizer("Accept")));
 
             List<String> headerNames = new ArrayList<String>();
             headerNames.add("content-type");
@@ -95,7 +95,6 @@ public class TranslationHandlerTest {
             when(mockedResponse.getHeaderNames()).thenReturn(headerNames);
             when(mockedResponse.getHeader(eq("content-type"))).thenReturn("application/xml");
             when(mockedResponse.getStatus()).thenReturn(200);
-
         }
 
         @Test
@@ -106,7 +105,7 @@ public class TranslationHandlerTest {
             when(mockedResponse.getContentType()).thenReturn("application/xml");
             when(mockedResponse.getHeader(eq("Content-Type"))).thenReturn("application/xml");
 
-            mutableHttpRequest = MutableHttpServletRequest.wrap((HttpServletRequest) mockedRequest);
+            mutableHttpRequest = MutableHttpServletRequest.wrap(mockedRequest);
             mutableHttpResponse = MutableHttpServletResponse.wrap(mockedRequest, mockedResponse);
             mutableHttpResponse.setHeader("Content-Type", "application/xml");
 
@@ -127,7 +126,7 @@ public class TranslationHandlerTest {
             when(mockedRequest.getAttribute(eq("repose.response.input.stream"))).thenReturn(response);
             when(mockedResponse.getContentType()).thenReturn("application/xml");
             when(mockedResponse.getHeader(eq("Content-Type"))).thenReturn("application/xml");
-            mutableHttpRequest = MutableHttpServletRequest.wrap((HttpServletRequest) mockedRequest);
+            mutableHttpRequest = MutableHttpServletRequest.wrap(mockedRequest);
             mutableHttpResponse = MutableHttpServletResponse.wrap(mockedRequest, mockedResponse);
             mutableHttpResponse.setHeader("Content-Type", "application/xml");
 
@@ -147,7 +146,7 @@ public class TranslationHandlerTest {
             when(mockedRequest.getAttribute(eq("repose.response.input.stream"))).thenReturn(null);
             when(mockedResponse.getContentType()).thenReturn("application/xml");
             when(mockedResponse.getHeader(eq("Content-Type"))).thenReturn("application/xml");
-            mutableHttpRequest = MutableHttpServletRequest.wrap((HttpServletRequest) mockedRequest);
+            mutableHttpRequest = MutableHttpServletRequest.wrap(mockedRequest);
             mutableHttpResponse = MutableHttpServletResponse.wrap(mockedRequest, mockedResponse);
             mutableHttpResponse.setHeader("Content-Type", "application/xml");
 
@@ -164,11 +163,11 @@ public class TranslationHandlerTest {
             InputStream response = this.getClass().getResourceAsStream("/remove-me-element.xml");
             when(mockedRequest.getAttribute(eq("repose.response.input.stream"))).thenReturn(response);
             when(mockedRequest.getHeader(eq("Accept"))).thenReturn("application/json");
-            when(mockedRequest.getHeaders(eq("accept"))).thenReturn((Enumeration) new StringTokenizer("application/json"));
+            when(mockedRequest.getHeaders(eq("accept"))).thenReturn(new StringTokenizerEnumeration(new StringTokenizer("application/json")));
             when(mockedRequest.getContentType()).thenReturn("application/xml");
             when(mockedResponse.getContentType()).thenReturn("application/xml");
             when(mockedResponse.getHeader(eq("Content-Type"))).thenReturn("application/xml");
-            mutableHttpRequest = MutableHttpServletRequest.wrap((HttpServletRequest) mockedRequest);
+            mutableHttpRequest = MutableHttpServletRequest.wrap(mockedRequest);
             mutableHttpResponse = MutableHttpServletResponse.wrap(mockedRequest, mockedResponse);
             mutableHttpResponse.setHeader("Content-Type", "application/xml");
 
@@ -238,9 +237,9 @@ public class TranslationHandlerTest {
             when(mockedRequest.getRequestURI()).thenReturn("/129.0.0.1/servers/");
             when(mockedRequest.getMethod()).thenReturn("POST");
             when(mockedRequest.getHeader(eq("Accept"))).thenReturn("application/xml");
-            when(mockedRequest.getHeaders(eq("accept"))).thenReturn((Enumeration) new StringTokenizer("application/xml"));
-            when(mockedRequest.getHeaders(eq("content-type"))).thenReturn((Enumeration) new StringTokenizer("application/xml"));
-            when(mockedRequest.getHeaderNames()).thenReturn((Enumeration) new StringTokenizer("Accept,content-type", ",", false));
+            when(mockedRequest.getHeaders(eq("accept"))).thenReturn(new StringTokenizerEnumeration(new StringTokenizer("application/xml")));
+            when(mockedRequest.getHeaders(eq("content-type"))).thenReturn(new StringTokenizerEnumeration(new StringTokenizer("application/xml")));
+            when(mockedRequest.getHeaderNames()).thenReturn(new StringTokenizerEnumeration(new StringTokenizer("Accept,content-type", ",", false)));
 
             List<String> headerNames = new ArrayList<String>();
             headerNames.add("content-type");
@@ -260,7 +259,7 @@ public class TranslationHandlerTest {
             when(mockedRequest.getContentType()).thenReturn("application/xml");
             when(mockedResponse.getHeader(eq("Content-Type"))).thenReturn("application/xml");
 
-            mutableHttpRequest = MutableHttpServletRequest.wrap((HttpServletRequest) mockedRequest);
+            mutableHttpRequest = MutableHttpServletRequest.wrap(mockedRequest);
             mutableHttpResponse = MutableHttpServletResponse.wrap(mockedRequest, mockedResponse);
             mutableHttpResponse.setHeader("Content-Type", "application/xml");
 
@@ -279,7 +278,7 @@ public class TranslationHandlerTest {
 
             ServletInputStream response = new BufferedServletInputStream(this.getClass().getResourceAsStream("/remove-me-element.xml"));
             when(mockedRequest.getInputStream()).thenReturn(response);
-            mutableHttpRequest = MutableHttpServletRequest.wrap((HttpServletRequest) mockedRequest);
+            mutableHttpRequest = MutableHttpServletRequest.wrap(mockedRequest);
             mutableHttpResponse = MutableHttpServletResponse.wrap(mockedRequest, mockedResponse);
             when(mockedRequest.getContentType()).thenReturn("application/xml");
             when(mockedResponse.getHeader(eq("Content-Type"))).thenReturn("application/xml");
@@ -300,10 +299,10 @@ public class TranslationHandlerTest {
             ServletInputStream response = new BufferedServletInputStream(this.getClass().getResourceAsStream("/remove-me-element.xml"));
             when(mockedRequest.getInputStream()).thenReturn(response);
             when(mockedRequest.getHeader(eq("Accept"))).thenReturn("application/other");
-            when(mockedRequest.getHeaders(eq("accept"))).thenReturn((Enumeration) new StringTokenizer("application/other"));
+            when(mockedRequest.getHeaders(eq("accept"))).thenReturn(new StringTokenizerEnumeration(new StringTokenizer("application/other")));
             when(mockedRequest.getContentType()).thenReturn("application/other");
             when(mockedResponse.getHeader(eq("Content-Type"))).thenReturn("application/other");
-            mutableHttpRequest = MutableHttpServletRequest.wrap((HttpServletRequest) mockedRequest);
+            mutableHttpRequest = MutableHttpServletRequest.wrap(mockedRequest);
             mutableHttpResponse = MutableHttpServletResponse.wrap(mockedRequest, mockedResponse);
             mutableHttpResponse.setHeader("Content-Type", "application/xml");
 
@@ -317,5 +316,23 @@ public class TranslationHandlerTest {
             assertEquals(director.getFilterAction(), FilterAction.PROCESS_RESPONSE);
             assertTrue(diff1.similar());
         }        
+    }
+
+    private static class StringTokenizerEnumeration implements Enumeration<String> {
+        private final StringTokenizer tokenizer;
+
+        public StringTokenizerEnumeration(StringTokenizer tokenizer) {
+            this.tokenizer = tokenizer;
+        }
+
+        @Override
+        public boolean hasMoreElements() {
+            return tokenizer.hasMoreElements();
+        }
+
+        @Override
+        public String nextElement() {
+            return tokenizer.nextToken();
+        }
     }
 }
