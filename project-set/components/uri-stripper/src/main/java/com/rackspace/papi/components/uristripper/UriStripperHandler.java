@@ -130,7 +130,7 @@ public class UriStripperHandler extends AbstractFilterLogicHandler {
 
         uri = StringUriUtilities.formatUriNoLead(uri);
 
-        List<String> uriList = new ArrayList(Arrays.asList(uri.split(URI_DELIMITER)));
+        List<String> uriList = new ArrayList<String>(Arrays.asList(uri.split(URI_DELIMITER)));
 
         return uriList;
     }
