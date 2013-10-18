@@ -44,8 +44,8 @@ public class ConfigurationInformation implements ConfigurationInformationMBean, 
       private final String regex;
       private final String configuration;
       private boolean isConfiguarationLoaded;
-      private Map successConfigurationLoadinginformation;
-      private Map failedConfigurationLoadingInformation;
+      private Map<String, String[]> successConfigurationLoadinginformation;
+      private Map<String, String[]> failedConfigurationLoadingInformation;
 
       public FilterInformation(String id, String name, String regex, String configuration, Boolean isConfiguarationLoaded) {
          this.id = id;
@@ -87,7 +87,7 @@ public class ConfigurationInformation implements ConfigurationInformationMBean, 
          return successConfigurationLoadinginformation;
       }
 
-      public void setSuccessConfigurationLoadinginformation(Map successConfigurationLoadinginformation) {
+      public void setSuccessConfigurationLoadinginformation(Map<String, String[]> successConfigurationLoadinginformation) {
          this.successConfigurationLoadinginformation = successConfigurationLoadinginformation;
       }
 
@@ -95,7 +95,7 @@ public class ConfigurationInformation implements ConfigurationInformationMBean, 
          return failedConfigurationLoadingInformation;
       }
 
-      public void setFailedConfigurationLoadingInformation(Map failedConfigurationLoadingInformation) {
+      public void setFailedConfigurationLoadingInformation(Map<String, String[]> failedConfigurationLoadingInformation) {
          this.failedConfigurationLoadingInformation = failedConfigurationLoadingInformation;
       }
    }

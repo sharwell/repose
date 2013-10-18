@@ -43,9 +43,9 @@ public class PowerFilterTest {
         public void shouldDoFilter() throws IOException, ServletException, NamingException {
             ResponseMessageService mockedResponseMessageService = mock(ResponseMessageService.class);
             Context mockedContext = mock(Context.class);
-            ServiceContext mockedServiceContext = mock(ServiceContext.class);
-            ServiceContext mockedEventServiceContext = mock(ServiceContext.class);
-            ServiceContext mockedConfigServiceContext = mock(ServiceContext.class);
+            ServiceContext<?> mockedServiceContext = mock(ServiceContext.class);
+            ServiceContext<?> mockedEventServiceContext = mock(ServiceContext.class);
+            ServiceContext<?> mockedConfigServiceContext = mock(ServiceContext.class);
             FilterConfig mockedFilterConfig = mock(FilterConfig.class);
             ServletContext mockedServletContext = mock(ServletContext.class);
             FakeFilterRegistration mockedFilterRegistration = new FakeFilterRegistration();
@@ -64,6 +64,7 @@ public class PowerFilterTest {
             when(mockedServletContext.addFilter(any(String.class), any(Filter.class))).thenReturn(mockedFilterRegistration);
             when(mockedServletContext.getAttribute("PAPI_ServletContext")).thenReturn(mockedContext);
 
+            @SuppressWarnings("unchecked")
             Enumeration<String> mockedHeaderNames = mock(Enumeration.class);
             FilterChain mockedFilterChain = mock(FilterChain.class);
             HttpServletRequest request = mock(HttpServletRequest.class);

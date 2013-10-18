@@ -17,7 +17,7 @@ public class FlushOutputHandlerFactory extends AbstractConfiguredFilterHandlerFa
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>();
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>();
     }
 }

@@ -209,8 +209,8 @@ public class ApiValidatorHandlerFactory extends AbstractConfiguredFilterHandlerF
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        final Map<Class, UpdateListener<?>> updateListeners = new HashMap<Class, UpdateListener<?>>();
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        final Map<Class<?>, UpdateListener<?>> updateListeners = new HashMap<Class<?>, UpdateListener<?>>();
         ApiValidationConfigurationListener avcl = new ApiValidationConfigurationListener();
 
         for (Class<? extends BaseValidatorConfiguration> c : ValidatorConfigurator.getConfigurationClasses()) {

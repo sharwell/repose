@@ -68,7 +68,7 @@ public class PowerApiUpdateManagerEventListener implements EventListener<Configu
         return Collections.unmodifiableMap(mapReference);
     }
 
-    private void configUpdate(UpdateListener upd, Object cfg) {
+    private <T> void configUpdate(UpdateListener<? super T> upd, T cfg) {
         upd.configurationUpdated(cfg);
         LOG.debug("Configuration Updated: " + cfg.toString());
 

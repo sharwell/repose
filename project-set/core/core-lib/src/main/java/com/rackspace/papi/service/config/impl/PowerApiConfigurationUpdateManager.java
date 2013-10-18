@@ -59,7 +59,7 @@ public class PowerApiConfigurationUpdateManager implements ConfigurationUpdateMa
    }
 
    @Override
-   public synchronized <T> void registerListener(UpdateListener<T> listener, ConfigurationResource resource, ConfigurationParser<T> parser, String filterName) {
+   public synchronized <T> void registerListener(UpdateListener<? super T> listener, ConfigurationResource resource, ConfigurationParser<T> parser, String filterName) {
       Map<Integer, ParserListenerPair> resourceListeners = listenerMap.get(resource.name());
 
       if (resourceListeners == null) {
@@ -73,7 +73,7 @@ public class PowerApiConfigurationUpdateManager implements ConfigurationUpdateMa
    }
 
    @Override
-   public synchronized <T> void unregisterListener(UpdateListener<T> listener, ConfigurationResource resource) {
+   public synchronized void unregisterListener(UpdateListener<?> listener, ConfigurationResource resource) {
       Map<Integer, ParserListenerPair> resourceListeners = listenerMap.get(resource.name());
 
       if (resourceListeners != null) {

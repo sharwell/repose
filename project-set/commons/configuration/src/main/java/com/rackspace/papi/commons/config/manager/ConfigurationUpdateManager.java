@@ -6,8 +6,8 @@ import com.rackspace.papi.commons.util.Destroyable;
 
 public interface ConfigurationUpdateManager extends Destroyable {
 
-     <T> void registerListener(UpdateListener<T> listener, ConfigurationResource resource, ConfigurationParser<T> parser, String filterName);
+     <T> void registerListener(UpdateListener<? super T> listener, ConfigurationResource resource, ConfigurationParser<T> parser, String filterName);
 
-     <T> void unregisterListener(UpdateListener<T> listener, ConfigurationResource resource);
+     void unregisterListener(UpdateListener<?> listener, ConfigurationResource resource);
      
 }

@@ -53,8 +53,8 @@ public class ClientAuthenticationHandlerFactory extends AbstractConfiguredFilter
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        final Map<Class, UpdateListener<?>> listenerMap = new HashMap<Class, UpdateListener<?>>();
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        final Map<Class<?>, UpdateListener<?>> listenerMap = new HashMap<Class<?>, UpdateListener<?>>();
         listenerMap.put(ClientAuthConfig.class, new ClientAuthConfigurationListener());
 
         return listenerMap;

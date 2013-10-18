@@ -40,6 +40,7 @@ public class FilterContextManagerTest {
             mockedFilterConfig = mock(FilterConfig.class);
         }
 
+        @SuppressWarnings("unchecked")
         private EarClassLoaderContext getMockedEarClassLoader(String filterClassName, Boolean loadThrowsException) throws ClassNotFoundException {
             EarClassLoaderContext mockedEarClassLoaderContext = mock(EarClassLoaderContext.class);
             EarDescriptor mockedEarDescriptor = mock(EarDescriptor.class);
@@ -58,7 +59,7 @@ public class FilterContextManagerTest {
             if (loadThrowsException) {
                 when(mockedEarClassLoader.loadClass(any(String.class))).thenThrow(new ClassNotFoundException());
             } else {
-                when(mockedEarClassLoader.loadClass(any(String.class))).thenReturn((Class) FakeFilterClass.class);
+                when((Class<FakeFilterClass>)mockedEarClassLoader.loadClass(any(String.class))).thenReturn(FakeFilterClass.class);
             }
 
             return mockedEarClassLoaderContext;

@@ -71,8 +71,8 @@ public class RequestAuthorizationHandlerFactory extends AbstractConfiguredFilter
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        final Map<Class, UpdateListener<?>> updateListeners = new HashMap<Class, UpdateListener<?>>();
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        final Map<Class<?>, UpdateListener<?>> updateListeners = new HashMap<Class<?>, UpdateListener<?>>();
         updateListeners.put(RackspaceAuthorization.class, new RoutingConfigurationListener());
 
         return updateListeners;

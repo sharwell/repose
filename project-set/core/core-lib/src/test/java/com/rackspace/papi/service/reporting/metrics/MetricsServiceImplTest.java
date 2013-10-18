@@ -43,7 +43,7 @@ public class MetricsServiceImplTest {
 
         }
 
-        protected Object getAttribute( Class klass, String name, String scope, String att )
+        protected Object getAttribute( Class<?> klass, String name, String scope, String att )
               throws
               MalformedObjectNameException,
               AttributeNotFoundException,

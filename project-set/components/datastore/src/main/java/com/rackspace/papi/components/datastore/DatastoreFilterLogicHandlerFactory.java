@@ -55,8 +55,8 @@ public class DatastoreFilterLogicHandlerFactory extends AbstractConfiguredFilter
    }
 
    @Override
-   protected Map<Class, UpdateListener<?>> getListeners() {
-      final Map<Class, UpdateListener<?>> listeners = new HashMap<Class, UpdateListener<?>>();
+   protected Map<Class<?>, UpdateListener<?>> getListeners() {
+      final Map<Class<?>, UpdateListener<?>> listeners = new HashMap<Class<?>, UpdateListener<?>>();
       listeners.put(SystemModel.class, new SystemModelUpdateListener());
       listeners.put(DistributedDatastoreConfiguration.class, new DistributedDatastoreConfigurationListener());
 

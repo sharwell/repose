@@ -22,8 +22,8 @@ public class IpIdentityHandlerFactory extends AbstractConfiguredFilterHandlerFac
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>() {
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>() {
             {
                 put(IpIdentityConfig.class, new ClientIpIdentityConfigurationListener());
             }

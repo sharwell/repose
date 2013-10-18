@@ -49,7 +49,7 @@ public class SpringContextAdapter implements ContextAdapter {
       return applicationContext.getBean("reposeVersion", String.class);
    }
 
-   private String beanNameForClass(Class clazz) {
+   private String beanNameForClass(Class<?> clazz) {
       String name = clazz != null ? clazz.getSimpleName() : "";
       if (name == null || name.length() == 0) {
          return "";
@@ -130,7 +130,7 @@ public class SpringContextAdapter implements ContextAdapter {
    }
 
     @Override
-    public HttpClientService httpConnectionPoolService(){
+    public HttpClientService<?> httpConnectionPoolService(){
         return getService(ServiceContextName.HTTP_CONNECTION_POOL_SERVICE_CONTEXT);
     }
 

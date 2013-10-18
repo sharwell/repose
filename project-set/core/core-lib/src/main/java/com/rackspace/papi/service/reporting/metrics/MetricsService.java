@@ -17,10 +17,10 @@ public interface MetricsService extends Destroyable{
 
     void setEnabled(boolean b);
     boolean isEnabled();
-    Meter newMeter( Class klass, String name, String scope, String eventType, TimeUnit unit );
-    MeterByCategory newMeterByCategory( Class klass, String scope, String eventType, TimeUnit unit );
-    MeterByCategorySum newMeterByCategorySum( Class klass, String scope, String eventType, TimeUnit unit );
-    Counter newCounter( Class klass, String name, String scope );
+    Meter newMeter( Class<?> klass, String name, String scope, String eventType, TimeUnit unit );
+    MeterByCategory newMeterByCategory( Class<?> klass, String scope, String eventType, TimeUnit unit );
+    MeterByCategorySum newMeterByCategorySum( Class<?> klass, String scope, String eventType, TimeUnit unit );
+    Counter newCounter( Class<?> klass, String name, String scope );
     void addGraphiteServer( String host, int port, long period, String prefix ) throws IOException;
     void shutdownGraphite();
     void destroy();

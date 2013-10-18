@@ -65,8 +65,8 @@ public class RoutingHandlerFactory extends AbstractConfiguredFilterHandlerFactor
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>() {
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>() {
 
             {
                 put(SystemModel.class, new RoutingConfigurationListener());

@@ -176,7 +176,7 @@ public class PowerApiContextManager implements ServletContextListener {
       }
 
       ServiceRegistry registry = applicationContext.getBean("serviceRegistry", ServiceRegistry.class);
-      for (ServiceContext ctx : registry.getServices()) {
+      for (ServiceContext<?> ctx : registry.getServices()) {
          ctx.contextDestroyed(sce);
       }
 

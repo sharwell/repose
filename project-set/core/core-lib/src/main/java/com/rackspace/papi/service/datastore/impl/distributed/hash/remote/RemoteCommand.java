@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public interface RemoteCommand {
 
-   ServiceClientResponse execute(RequestProxyService proxyService, RemoteBehavior remoteBehavior);
-   Object handleResponse(ServiceClientResponse response) throws IOException;
+   <E> ServiceClientResponse<E> execute(RequestProxyService proxyService, RemoteBehavior remoteBehavior);
+   Object handleResponse(ServiceClientResponse<?> response) throws IOException;
    void setHostKey(String hostKey);
 }

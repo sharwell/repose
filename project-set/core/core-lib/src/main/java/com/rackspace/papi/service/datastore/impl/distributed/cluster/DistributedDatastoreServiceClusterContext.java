@@ -156,7 +156,7 @@ public class DistributedDatastoreServiceClusterContext implements ServiceContext
    @Override
    public void contextInitialized(ServletContextEvent sce) {
 
-      hostACL = new DatastoreAccessControl(Collections.EMPTY_LIST, false);
+      hostACL = new DatastoreAccessControl(Collections.<InetAddress>emptyList(), false);
       String ddPort = sce.getServletContext().getInitParameter("datastoreServicePort");
       ServicePorts servicePorts = new ServicePorts();
       servicePorts.add(new com.rackspace.papi.domain.Port("http", Integer.parseInt(ddPort)));

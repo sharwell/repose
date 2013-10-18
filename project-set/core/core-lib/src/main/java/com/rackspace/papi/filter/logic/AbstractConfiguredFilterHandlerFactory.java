@@ -8,9 +8,9 @@ import java.util.Map;
 /**
  * @author Dan Daley
  */
-public abstract class AbstractConfiguredFilterHandlerFactory<T extends FilterLogicHandler> implements UpdateListener {
+public abstract class AbstractConfiguredFilterHandlerFactory<T extends FilterLogicHandler> implements UpdateListener<Object> {
 
-    private final Map<Class, UpdateListener<?>> listeners;
+    private final Map<Class<?>, UpdateListener<?>> listeners;
     private final KeyedStackLock configurationLock;
     private final Object readKey, updateKey;
 
@@ -24,7 +24,7 @@ public abstract class AbstractConfiguredFilterHandlerFactory<T extends FilterLog
 
     protected abstract T buildHandler();
 
-    protected abstract Map<Class, UpdateListener<?>> getListeners();
+    protected abstract Map<Class<?>, UpdateListener<?>> getListeners();
 
     public T newHandler() {
         configurationLock.lock(readKey);
@@ -35,7 +35,7 @@ public abstract class AbstractConfiguredFilterHandlerFactory<T extends FilterLog
         }
     }
 
-    public UpdateListener getListener(Class configClass) {
+    public UpdateListener<?> getListener(Class<?> configClass) {
         return listeners.get(configClass);
     }
 

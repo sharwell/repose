@@ -3,7 +3,7 @@ package com.rackspace.papi.service.event.impl;
 import com.rackspace.papi.service.event.common.Event;
 import com.rackspace.papi.service.event.common.EventService;
 
-public class SimpleEvent <T extends Enum, P> implements Event<T, P> {
+public class SimpleEvent <T extends Enum<T>, P> implements Event<T, P> {
 
     private final P payload;
     private final T type;

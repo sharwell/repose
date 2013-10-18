@@ -30,7 +30,7 @@ public class PowerProxyEventKernel implements Runnable, Destroyable {
                 final EventDispatcher dispatcher = eventManager.nextDispatcher();
                 
                 if (LOG.isDebugEnabled()) {
-                    final Enum eventType = dispatcher.getEvent().type();
+                    final Enum<?> eventType = dispatcher.getEvent().type();
                     
                     LOG.debug("Dispatching event: " + eventType.getClass().getSimpleName() + "." + eventType.name());
                 }

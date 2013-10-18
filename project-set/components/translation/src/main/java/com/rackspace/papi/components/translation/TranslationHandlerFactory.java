@@ -46,8 +46,8 @@ public class TranslationHandlerFactory extends AbstractConfiguredFilterHandlerFa
   }
 
   @Override
-  protected Map<Class, UpdateListener<?>> getListeners() {
-    return new HashMap<Class, UpdateListener<?>>() {
+  protected Map<Class<?>, UpdateListener<?>> getListeners() {
+    return new HashMap<Class<?>, UpdateListener<?>>() {
       {
         put(TranslationConfig.class, new TranslationConfigurationListener());
       }

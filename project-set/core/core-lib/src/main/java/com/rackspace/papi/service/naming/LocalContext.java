@@ -16,7 +16,7 @@ public abstract class LocalContext extends AbstractContext {
    
    private final Map<String, Object> bindingsMap;
 
-   public LocalContext(String contextName, Map environment) {
+   public LocalContext(String contextName, Map<? extends String, ? extends Object> environment) {
       super(contextName, environment);
 
       this.bindingsMap = Collections.synchronizedMap(new TreeMap<String, Object>());
@@ -31,7 +31,7 @@ public abstract class LocalContext extends AbstractContext {
    protected void validateBindingObject(Object binding) throws NamingException {
    }
 
-   protected Context newContext(String contextName, Map environment) throws NamingException {
+   protected Context newContext(String contextName, Map<? extends String, ? extends Object> environment) throws NamingException {
       throw new OperationNotSupportedException();
    }
 

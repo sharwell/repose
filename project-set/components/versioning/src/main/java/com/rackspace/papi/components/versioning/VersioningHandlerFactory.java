@@ -37,8 +37,8 @@ public class VersioningHandlerFactory extends AbstractConfiguredFilterHandlerFac
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>() {
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>() {
             {
                 put(ServiceVersionMappingList.class, new VersioningConfigurationListener());
                 put(SystemModel.class, new SystemModelConfigurationListener());

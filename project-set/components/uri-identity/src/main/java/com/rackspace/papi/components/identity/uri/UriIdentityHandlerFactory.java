@@ -25,8 +25,8 @@ public class UriIdentityHandlerFactory extends AbstractConfiguredFilterHandlerFa
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>() {
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>() {
             {
                 put(UriIdentityConfig.class, new UriIdentityConfigurationListener());
             }

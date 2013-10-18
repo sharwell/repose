@@ -43,8 +43,8 @@ public class DestinationCompositeDataBuilder extends CompositeDataBuilder {
     }
 
     @Override
-    public OpenType[] getItemTypes() {
-        return new OpenType[]{SimpleType.STRING, SimpleType.LONG, SimpleType.LONG, SimpleType.LONG, SimpleType.DOUBLE, SimpleType.DOUBLE};
+    public OpenType<?>[] getItemTypes() {
+        return new OpenType<?>[]{SimpleType.STRING, SimpleType.LONG, SimpleType.LONG, SimpleType.LONG, SimpleType.DOUBLE, SimpleType.DOUBLE};
     }
 
     @Override

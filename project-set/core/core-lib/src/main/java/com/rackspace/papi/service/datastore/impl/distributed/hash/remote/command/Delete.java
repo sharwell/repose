@@ -18,12 +18,12 @@ public class Delete extends AbstractRemoteCommand {
     }
 
     @Override
-    public ServiceClientResponse execute(RequestProxyService proxyService, RemoteBehavior remoteBehavior) {
+    public <E> ServiceClientResponse<E> execute(RequestProxyService proxyService, RemoteBehavior remoteBehavior) {
         return proxyService.delete(getBaseUrl(), getCacheObjectKey(), getHeaders(remoteBehavior));
     }
 
     @Override
-    public Object handleResponse(ServiceClientResponse response) throws IOException {
+    public Object handleResponse(ServiceClientResponse<?> response) throws IOException {
         return Boolean.valueOf(response.getStatusCode() == HttpStatusCode.ACCEPTED.intValue());
     }
 }

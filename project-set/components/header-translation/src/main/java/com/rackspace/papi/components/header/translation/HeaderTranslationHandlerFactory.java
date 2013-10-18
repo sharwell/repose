@@ -27,8 +27,8 @@ public class HeaderTranslationHandlerFactory extends AbstractConfiguredFilterHan
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>() {
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>() {
             {
                 put(HeaderTranslationType.class, new HeaderTranslationConfigurationListener());
             }

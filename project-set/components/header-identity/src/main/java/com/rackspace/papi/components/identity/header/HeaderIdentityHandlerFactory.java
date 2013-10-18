@@ -19,8 +19,8 @@ public class HeaderIdentityHandlerFactory extends AbstractConfiguredFilterHandle
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>() {
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>() {
             {
                 put(HeaderIdentityConfig.class, new HeaderIdentityConfigurationListener());
             }

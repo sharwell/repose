@@ -10,7 +10,7 @@ public interface StoredElement {
 
     Class<?> elementClass();
     
-    boolean elementIs(Class clazz);
+    boolean elementIs(Class<?> clazz);
     
      <T> T elementAs(Class<T> clazz);
 }

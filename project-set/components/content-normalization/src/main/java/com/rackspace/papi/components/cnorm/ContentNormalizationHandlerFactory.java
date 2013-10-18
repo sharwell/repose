@@ -20,8 +20,8 @@ public class ContentNormalizationHandlerFactory extends AbstractConfiguredFilter
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>() {
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>() {
             {
                 put(ContentNormalizationConfig.class, new ContentNormalizationConfigurationListener());
             }

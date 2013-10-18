@@ -44,8 +44,8 @@ public class ConfigurationInformationCompositeDataBuilder extends CompositeDataB
     }
 
     @Override
-    public OpenType[] getItemTypes() {
-        return new OpenType[]{SimpleType.STRING, SimpleType.STRING, SimpleType.STRING, SimpleType.STRING,SimpleType.BOOLEAN, SimpleType.STRING, SimpleType.STRING};
+    public OpenType<?>[] getItemTypes() {
+        return new OpenType<?>[]{SimpleType.STRING, SimpleType.STRING, SimpleType.STRING, SimpleType.STRING,SimpleType.BOOLEAN, SimpleType.STRING, SimpleType.STRING};
     }
 
     @Override

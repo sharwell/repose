@@ -19,8 +19,8 @@ public class ServiceAuthHandlerFactory extends AbstractConfiguredFilterHandlerFa
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>() {
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>() {
             {
                 put(ServiceAuthenticationConfig.class, new ClientIpIdentityConfigurationListener());
             }

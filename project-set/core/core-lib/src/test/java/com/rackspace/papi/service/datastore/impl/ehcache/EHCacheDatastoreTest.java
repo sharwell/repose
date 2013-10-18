@@ -13,6 +13,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import java.util.UUID;
+import net.sf.ehcache.config.PersistenceConfiguration;
 
 import static org.junit.Assert.*;
 
@@ -29,7 +30,7 @@ public class EHCacheDatastoreTest {
         public static void setUpClass() {
             Configuration defaultConfiguration = new Configuration();
             defaultConfiguration.setName("TestCacheManager");
-            defaultConfiguration.setDefaultCacheConfiguration(new CacheConfiguration().diskPersistent(false));
+            defaultConfiguration.setDefaultCacheConfiguration(new CacheConfiguration().persistence(new PersistenceConfiguration().strategy(PersistenceConfiguration.Strategy.NONE)));
             defaultConfiguration.setUpdateCheck(false);
 
             cacheManager = CacheManager.newInstance(defaultConfiguration);

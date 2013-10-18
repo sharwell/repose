@@ -5,6 +5,7 @@ import com.rackspace.papi.service.datastore.impl.replicated.notification.out.Upd
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.Configuration;
+import net.sf.ehcache.config.PersistenceConfiguration;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -25,7 +26,7 @@ public class ReplicatedDatastoreImplTest {
         public static void setUpClass() {
             Configuration defaultConfiguration = new Configuration();
             defaultConfiguration.setName("TestCacheManager");
-            defaultConfiguration.setDefaultCacheConfiguration(new CacheConfiguration().diskPersistent(false));
+            defaultConfiguration.setDefaultCacheConfiguration(new CacheConfiguration().persistence(new PersistenceConfiguration().strategy(PersistenceConfiguration.Strategy.NONE)));
             defaultConfiguration.setUpdateCheck(false);
 
             ehCacheManager = CacheManager.newInstance(defaultConfiguration);

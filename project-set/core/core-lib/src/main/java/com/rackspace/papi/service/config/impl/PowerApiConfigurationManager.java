@@ -29,7 +29,7 @@ import java.util.Map;
 public class PowerApiConfigurationManager implements ConfigurationService {
 
     private static final Logger LOG = LoggerFactory.getLogger(PowerApiConfigurationManager.class);
-    private final Map<Class, WeakReference<ConfigurationParser>> parserLookaside;
+    private final Map<Class<?>, WeakReference<ConfigurationParser<?>>> parserLookaside;
     private ConfigurationUpdateManager updateManager;
     private ConfigurationResourceResolver resourceResolver;
     private ConfigurationInformation configurationInformation;
@@ -48,7 +48,7 @@ public class PowerApiConfigurationManager implements ConfigurationService {
     @Autowired
     public PowerApiConfigurationManager(@Qualifier("reposeVersion") String version) {
         LOG.error("Repose Version: " + version);
-        parserLookaside = new HashMap<Class, WeakReference<ConfigurationParser>>();
+        parserLookaside = new HashMap<Class<?>, WeakReference<ConfigurationParser<?>>>();
     }
 
     @Override
@@ -73,26 +73,26 @@ public class PowerApiConfigurationManager implements ConfigurationService {
     }
     
    @Override
-    public <T> void subscribeTo(String configurationName,  UpdateListener<T> listener, Class<T> configurationClass) {
+    public <T> void subscribeTo(String configurationName,  UpdateListener<? super T> listener, Class<T> configurationClass) {
         subscribeTo("",configurationName, listener, getPooledJaxbConfigurationParser(configurationClass, null),true);
        
     }
     
     @Override
-    public <T> void subscribeTo(String filterName,String configurationName,  UpdateListener<T> listener, Class<T> configurationClass) {
+    public <T> void subscribeTo(String filterName,String configurationName,  UpdateListener<? super T> listener, Class<T> configurationClass) {
         subscribeTo(filterName,configurationName, listener, getPooledJaxbConfigurationParser(configurationClass, null),true);
        
     }
    
     @Override
-    public <T> void subscribeTo(String configurationName, URL xsdStreamSource, UpdateListener<T> listener, Class<T> configurationClass) {
+    public <T> void subscribeTo(String configurationName, URL xsdStreamSource, UpdateListener<? super T> listener, Class<T> configurationClass) {
         subscribeTo("",configurationName, listener, getPooledJaxbConfigurationParser(configurationClass, xsdStreamSource),true);
        
         
     }
 
     @Override
-    public <T> void subscribeTo(String filterName,String configurationName, URL xsdStreamSource, UpdateListener<T> listener, Class<T> configurationClass) {
+    public <T> void subscribeTo(String filterName,String configurationName, URL xsdStreamSource, UpdateListener<? super T> listener, Class<T> configurationClass) {
         subscribeTo(filterName,configurationName, listener, getPooledJaxbConfigurationParser(configurationClass, xsdStreamSource),true);
        
         
@@ -100,12 +100,12 @@ public class PowerApiConfigurationManager implements ConfigurationService {
         
 
     @Override
-    public <T> void subscribeTo(String filterName,String configurationName, UpdateListener<T> listener, ConfigurationParser<T> customParser) {
+    public <T> void subscribeTo(String filterName,String configurationName, UpdateListener<? super T> listener, ConfigurationParser<T> customParser) {
         subscribeTo(filterName,configurationName, listener, customParser, true);
     }
 
     @Override
-    public <T> void subscribeTo(String filterName,String configurationName, UpdateListener<T> listener, ConfigurationParser<T> customParser, boolean sendNotificationNow) {
+    public <T> void subscribeTo(String filterName,String configurationName, UpdateListener<? super T> listener, ConfigurationParser<T> customParser, boolean sendNotificationNow) {
         final ConfigurationResource resource = resourceResolver.resolve(configurationName);
          updateManager.registerListener(listener, resource, customParser,filterName); 
         if (sendNotificationNow) {
@@ -137,13 +137,13 @@ public class PowerApiConfigurationManager implements ConfigurationService {
     }
 
     @Override
-    public void unsubscribeFrom(String configurationName, UpdateListener listener) {
+    public void unsubscribeFrom(String configurationName, UpdateListener<?> listener) {
         updateManager.unregisterListener(listener, resourceResolver.resolve(configurationName));
     }
 
     public <T> ConfigurationParser<T> getPooledJaxbConfigurationParser(Class<T> configurationClass, URL xsdStreamSource) {
-        final WeakReference<ConfigurationParser> parserReference = parserLookaside.get(configurationClass);
-        ConfigurationParser<T> parser = parserReference != null ? parserReference.get() : null;
+        final WeakReference<ConfigurationParser<?>> parserReference = parserLookaside.get(configurationClass);
+        ConfigurationParser<?> parser = parserReference != null ? parserReference.get() : null;
 
         if (parser == null) {
             try {
@@ -152,10 +152,10 @@ public class PowerApiConfigurationManager implements ConfigurationService {
                 throw new ConfigurationServiceException("Failed to create a JAXB context for a configuration parser. Reason: " + cre.getMessage(), cre);
             }
 
-            parserLookaside.put(configurationClass, new WeakReference<ConfigurationParser>(parser));
+            parserLookaside.put(configurationClass, new WeakReference<ConfigurationParser<?>>(parser));
         }
 
-        return parser;
+        return (ConfigurationParser<T>) parser;
     }
    
 }

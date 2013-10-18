@@ -7,16 +7,16 @@ import java.util.Set;
 
 public class EventDispatcherImpl implements EventDispatcher {
 
-    private final Set<EventListenerDescriptor> listeners;
-    private final Event e;
+    private final Set<EventListenerDescriptor<?>> listeners;
+    private final Event<?, ?> e;
 
-    public EventDispatcherImpl(Event e, Set<EventListenerDescriptor> listeners) {
+    public EventDispatcherImpl(Event<?, ?> e, Set<EventListenerDescriptor<?>> listeners) {
         this.listeners = listeners;
         this.e = e;
     }
 
     @Override
-    public Event getEvent() {
+    public Event<?, ?> getEvent() {
         return e;
     }
 

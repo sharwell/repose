@@ -17,14 +17,14 @@ import java.util.concurrent.locks.ReentrantLock;
 @Component("eventManager")
 public class PowerProxyEventManager implements EventService {
 
-    private final Map<ComparableClassWrapper<Enum>, Set<EventListenerDescriptor>> listenerMap;
-    private final Queue<Event> eventQueue;
+    private final Map<ComparableClassWrapper<? extends Enum<?>>, Set<EventListenerDescriptor<?>>> listenerMap;
+    private final Queue<Event<?, ?>> eventQueue;
     private final Lock eventQueueLock;
     private final Condition queueNotEmpty;
 
     public PowerProxyEventManager() {
-        listenerMap = new TreeMap<ComparableClassWrapper<Enum>, Set<EventListenerDescriptor>>();
-        eventQueue = new LinkedList<Event>();
+        listenerMap = new TreeMap<ComparableClassWrapper<? extends Enum<?>>, Set<EventListenerDescriptor<?>>>();
+        eventQueue = new LinkedList<Event<?, ?>>();
 
         eventQueueLock = new ReentrantLock();
         queueNotEmpty = eventQueueLock.newCondition();
@@ -32,12 +32,12 @@ public class PowerProxyEventManager implements EventService {
 
     @Override
     public synchronized EventDispatcher nextDispatcher() throws InterruptedException {
-        final Event e = nextEvent();
+        final Event<?, ?> e = nextEvent();
 
         return new EventDispatcherImpl(e, Collections.unmodifiableSet(getOrCreateListenerSet(e.type().getClass())));
     }
 
-    private Event nextEvent() throws InterruptedException {
+    private Event<?, ?> nextEvent() throws InterruptedException {
         eventQueueLock.lock();
 
         try {
@@ -55,11 +55,11 @@ public class PowerProxyEventManager implements EventService {
     }
 
     @Override
-    public void newEvent(Enum e, Object payload) {
+    public <T extends Enum<T>, P> void newEvent(T e, P payload) {
         eventQueueLock.lock();
 
         try {
-            eventQueue.add(new SimpleEvent(e, payload, this));
+            eventQueue.add(new SimpleEvent<T, P>(e, payload, this));
 
             if (eventQueue.size() == 1) {
                 queueNotEmpty.signalAll();
@@ -70,12 +70,12 @@ public class PowerProxyEventManager implements EventService {
     }
 
     @Override
-    public <T extends Enum> void listen(EventListener<T, ?> el, Class<T> events) {
+    public <T extends Enum<T>> void listen(EventListener<T, ?> el, Class<T> events) {
         regsiterListener(el, events, EnumSet.allOf(events));
     }
 
     @Override
-    public <T extends Enum> void listen(EventListener<T, ?> el, T... events) {
+    public <T extends Enum<T>> void listen(EventListener<T, ?> el, T... events) {
         if (events == null || events.length == 0) {
             throw new IllegalArgumentException("Must subscribe to at least one event type");
         }
@@ -88,14 +88,15 @@ public class PowerProxyEventManager implements EventService {
         }
     }
 
-    private <T extends Enum> void regsiterListener(EventListener<T, ?> el, Class<T> enumClass, Collection<T> events) {
+    private <T extends Enum<T>> void regsiterListener(EventListener<T, ?> el, Class<T> enumClass, Collection<T> events) {
         boolean found = false;
 
-        final Set<EventListenerDescriptor> descriptorSet = getOrCreateListenerSet(enumClass);
+        final Set<EventListenerDescriptor<?>> descriptorSet = getOrCreateListenerSet(enumClass);
 
-        for (EventListenerDescriptor<T> descriptor : descriptorSet) {
+        for (EventListenerDescriptor<?> descriptor : descriptorSet) {
             if (descriptor.getListener() == el) {
-                descriptor.listenFor(events);
+                EventListenerDescriptor<T> typedDescriptor = (EventListenerDescriptor<T>)descriptor;
+                typedDescriptor.listenFor(events);
                 found = true;
 
                 break;
@@ -108,14 +109,14 @@ public class PowerProxyEventManager implements EventService {
     }
 
     @Override
-    public <T extends Enum> void squelch(EventListener<T, ?> el, Class<T> events) {
-        final Set<EventListenerDescriptor> listenerSet = listenerMap.get(new ComparableClassWrapper<Enum>(events));
+    public <T extends Enum<T>> void squelch(EventListener<T, ?> el, Class<T> events) {
+        final Set<EventListenerDescriptor<?>> listenerSet = listenerMap.get(createComparableClassWrapper(events));
 
         if (listenerSet != null) {
-            final Iterator<EventListenerDescriptor> itr = listenerSet.iterator();
+            final Iterator<EventListenerDescriptor<?>> itr = listenerSet.iterator();
 
             while (itr.hasNext()) {
-                final EventListenerDescriptor<T> elw = itr.next();
+                final EventListenerDescriptor<?> elw = itr.next();
 
                 if (elw.getListener() == el) {
                     itr.remove();
@@ -126,21 +127,22 @@ public class PowerProxyEventManager implements EventService {
     }
 
     @Override
-    public <T extends Enum> void squelch(EventListener<T, ?> el, T... events) {
+    public <T extends Enum<T>> void squelch(EventListener<T, ?> el, T... events) {
         if (events == null || events.length == 0) {
             throw new IllegalArgumentException("Must unsubscribe from at least one event type");
         }
 
-        final Set<EventListenerDescriptor> listenerSet = listenerMap.get(new ComparableClassWrapper<Enum>(events[0].getClass()));
+        final Set<EventListenerDescriptor<?>> listenerSet = listenerMap.get(createComparableClassWrapper(events[0].getClass()));
 
         if (listenerSet != null) {
-            final Iterator<EventListenerDescriptor> itr = listenerSet.iterator();
+            final Iterator<EventListenerDescriptor<?>> itr = listenerSet.iterator();
 
             while (itr.hasNext()) {
-                final EventListenerDescriptor<T> elw = itr.next();
+                final EventListenerDescriptor<?> elw = itr.next();
 
                 if (elw.getListener() == el) {
-                    if (elw.silence(Arrays.asList(events))) {
+                    EventListenerDescriptor<T> descriptor = (EventListenerDescriptor<T>)elw;
+                    if (descriptor.silence(Arrays.asList(events))) {
                         itr.remove();
                     }
 
@@ -150,15 +152,19 @@ public class PowerProxyEventManager implements EventService {
         }
     }
 
-    private <T extends Enum> Set<EventListenerDescriptor> getOrCreateListenerSet(Class<T> e) {
-        final ComparableClassWrapper<Enum> classWrapper = new ComparableClassWrapper<Enum>(e);
-        Set<EventListenerDescriptor> listenerSet = listenerMap.get(classWrapper);
+    private <T extends Enum<T>> Set<EventListenerDescriptor<?>> getOrCreateListenerSet(Class<T> e) {
+        final ComparableClassWrapper<? extends Enum<?>> classWrapper = createComparableClassWrapper(e);
+        Set<EventListenerDescriptor<?>> listenerSet = listenerMap.get(classWrapper);
 
         if (listenerSet == null) {
-            listenerSet = new HashSet<EventListenerDescriptor>();
+            listenerSet = new HashSet<EventListenerDescriptor<?>>();
             listenerMap.put(classWrapper, listenerSet);
         }
 
         return listenerSet;
+    }
+
+    private <T extends Enum<T>> ComparableClassWrapper<T> createComparableClassWrapper(Class<T> e) {
+        return new ComparableClassWrapper<T>(e);
     }
 }

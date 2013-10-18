@@ -68,6 +68,7 @@ public class PowerFilterChainBuilderTest {
       }
 
       @Test
+      @SuppressWarnings("unchecked")
       public void shouldBuild() throws ClassNotFoundException {
          ClassLoaderManagerService mockedEarClassLoaderContextManager = mock(ClassLoaderManagerService.class);
 
@@ -83,7 +84,7 @@ public class PowerFilterChainBuilderTest {
          when(mockedEarClassLoaderContext.getClassLoader()).thenReturn(mockedEarClassLoader);
          when(mockedFilterType.getFilterClass()).thenReturn(mockedClassType);
          when(mockedClassType.getValue()).thenReturn("FilterClassName");
-         when(mockedEarClassLoader.loadClass(any(String.class))).thenReturn((Class) FakeFilterClass.class);
+         when((Class<FakeFilterClass>)mockedEarClassLoader.loadClass(any(String.class))).thenReturn(FakeFilterClass.class);
 
          Collection<EarClassLoaderContext> loadedApplications = new LinkedList<EarClassLoaderContext>();
          loadedApplications.add(mockedEarClassLoaderContext);
@@ -120,6 +121,7 @@ public class PowerFilterChainBuilderTest {
 
          EarClassLoaderContext mockedEarClassLoaderContext = mock(EarClassLoaderContext.class);
          EarDescriptor mockedEarDescriptor = mock(EarDescriptor.class);
+         @SuppressWarnings("unchecked")
          Map<String, FilterType> mockedFiltersMap = mock(Map.class);
          EarClassLoader mockedEarClassLoader = mock(EarClassLoader.class);
          FilterType mockedFilterType = mock(FilterType.class);

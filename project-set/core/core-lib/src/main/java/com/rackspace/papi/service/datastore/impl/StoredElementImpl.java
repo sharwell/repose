@@ -50,7 +50,7 @@ public class StoredElementImpl implements StoredElement {
     }
 
     @Override
-    public boolean elementIs(Class clazz) {
+    public boolean elementIs(Class<?> clazz) {
         return !elementIsNull() && clazz.isAssignableFrom(getResolvedElement().getClass());
     }
 

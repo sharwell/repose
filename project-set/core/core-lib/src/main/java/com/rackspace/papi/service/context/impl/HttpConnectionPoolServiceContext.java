@@ -18,13 +18,13 @@ import java.net.URL;
  * subscribes to the http-connection-pool.cfg.xml configuration file.
  */
 
-public class HttpConnectionPoolServiceContext implements ServiceContext<HttpClientService> {
+public class HttpConnectionPoolServiceContext implements ServiceContext<HttpClientService<? super HttpConnectionPoolConfig>> {
     private static final Logger LOG = LoggerFactory.getLogger(HttpConnectionPoolServiceContext.class);
 
     public static final String SERVICE_NAME = "powerapi:/services/httpConnectionPool";
     public static final String DEFAULT_CONFIG_NAME = "http-connection-pool.cfg.xml";
 
-    private final HttpClientService connectionPoolService;
+    private final HttpClientService<? super HttpConnectionPoolConfig> connectionPoolService;
     private final ServiceRegistry registry;
     private final ConfigurationService configurationService;
     private final ConfigurationListener configurationListener;
@@ -32,7 +32,7 @@ public class HttpConnectionPoolServiceContext implements ServiceContext<HttpClie
     @Autowired
     public HttpConnectionPoolServiceContext( ServiceRegistry registry,
                                  ConfigurationService configurationService,
-                                 HttpClientService connectionPoolService) {
+                                 HttpClientService<? super HttpConnectionPoolConfig> connectionPoolService) {
 
         this.registry = registry;
         this.configurationService = configurationService;
@@ -52,7 +52,7 @@ public class HttpConnectionPoolServiceContext implements ServiceContext<HttpClie
     }
 
     @Override
-    public HttpClientService getService() {
+    public HttpClientService<? super HttpConnectionPoolConfig> getService() {
         return connectionPoolService;
     }
 

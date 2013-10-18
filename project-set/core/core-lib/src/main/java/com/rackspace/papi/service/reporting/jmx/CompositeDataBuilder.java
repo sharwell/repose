@@ -12,7 +12,7 @@ public abstract class CompositeDataBuilder {
 
     public abstract String[] getItemDescriptions();
 
-    public abstract OpenType[] getItemTypes();
+    public abstract OpenType<?>[] getItemTypes();
 
     public abstract Object[] getItems();
 

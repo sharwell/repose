@@ -61,12 +61,12 @@ class EmptyHeaderManager implements HeaderManager {
 
   @Override
   public Map<String, Set<String>> headersToAdd() {
-    return Collections.EMPTY_MAP;
+    return Collections.emptyMap();
   }
 
   @Override
   public Set<String> headersToRemove() {
-    return Collections.EMPTY_SET;
+    return Collections.emptySet();
   }
 
   @Override

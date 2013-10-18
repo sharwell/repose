@@ -45,7 +45,8 @@ public enum HttpComponentFactory {
         Constructor<? extends HttpRequestBase> httpConstructor = methodFactory.httpClass.getConstructor(String.class);
         HttpRequestBase httpMethod = httpConstructor.newInstance(uri);
 
-        Constructor<? extends HttpComponentProcessableRequest> constructor = (Constructor<? extends HttpComponentProcessableRequest>) methodFactory.wrapperClass.getConstructors()[0];
+        Constructor<?>[] constructors = methodFactory.wrapperClass.getConstructors();
+        Constructor<? extends HttpComponentProcessableRequest> constructor = methodFactory.wrapperClass.getConstructor(constructors[0].getParameterTypes());
         request = constructor.newInstance(httpMethod);
       } catch (InvocationTargetException ex) {
         LOG.error(CONSTRUCTION_ERROR, ex);
@@ -69,7 +70,8 @@ public enum HttpComponentFactory {
         Constructor<? extends HttpRequestBase> httpConstructor = methodFactory.httpClass.getConstructor(URI.class);
         HttpRequestBase httpMethod = httpConstructor.newInstance(uri);
 
-        Constructor<? extends HttpComponentProcessableRequest> constructor = (Constructor<? extends HttpComponentProcessableRequest>) methodFactory.wrapperClass.getConstructors()[0];
+        Constructor<?>[] constructors = methodFactory.wrapperClass.getConstructors();
+        Constructor<? extends HttpComponentProcessableRequest> constructor = methodFactory.wrapperClass.getConstructor(constructors[0].getParameterTypes());
         request = constructor.newInstance(httpMethod);
       } catch (InvocationTargetException ex) {
         LOG.error(CONSTRUCTION_ERROR, ex);

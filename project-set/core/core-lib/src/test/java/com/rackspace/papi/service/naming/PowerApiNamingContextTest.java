@@ -25,7 +25,7 @@ public class PowerApiNamingContextTest {
 
         @Before
         public void standUp() {
-            context = new PowerApiNamingContext("", new Hashtable());
+            context = new PowerApiNamingContext("", new Hashtable<String, Object>());
         }
     }
 

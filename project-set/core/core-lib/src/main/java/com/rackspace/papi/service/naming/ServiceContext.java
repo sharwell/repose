@@ -13,9 +13,9 @@ public class ServiceContext implements Context {
     private final Map<String, Object> bindingsMap;
     private final String nameInNamespace;
 
-    public ServiceContext(String contextName, Map environment) {
+    public ServiceContext(String contextName, Map<? extends String, ? extends Object> environment) {
         this.nameInNamespace = contextName;
-        this.environment = environment != null ? new HashMap(environment) : new HashMap<String, Object>();
+        this.environment = environment != null ? new HashMap<String, Object>(environment) : new HashMap<String, Object>();
 
         this.bindingsMap = Collections.synchronizedMap(new TreeMap<String, Object>());
     }
@@ -112,8 +112,8 @@ public class ServiceContext implements Context {
 
     @SuppressWarnings("PMD.ReplaceHashtableWithMap")
     @Override
-    public Hashtable<?, ?> getEnvironment() throws NamingException {
-        return new Hashtable(environment);
+    public Hashtable<String, Object> getEnvironment() throws NamingException {
+        return new Hashtable<String, Object>(environment);
     }
 
     @Override

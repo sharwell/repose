@@ -23,13 +23,13 @@ public class MeterByCategoryImpl implements MeterByCategory {
 
     private Map<String, Meter> map = new HashMap<String, Meter>();
     private MetricsService metricsService;
-    private Class klass;
+    private Class<?> klass;
     private String scope;
     private String eventType;
     private TimeUnit unit;
 
 
-    MeterByCategoryImpl( MetricsService metricsServiceP, Class klassP, String scopeP, String eventTypeP,
+    MeterByCategoryImpl( MetricsService metricsServiceP, Class<?> klassP, String scopeP, String eventTypeP,
                          TimeUnit unitP ) {
 
         metricsService = metricsServiceP;

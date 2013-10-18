@@ -32,7 +32,7 @@ public class RemoteCommandExecutor {
     public Object execute(final RemoteCommand command, RemoteBehavior behavior) {
         try {
             command.setHostKey(hostKey);
-            ServiceClientResponse execute = command.execute(proxyService, behavior);
+            ServiceClientResponse<?> execute = command.execute(proxyService, behavior);
             return command.handleResponse(execute);
         } catch (ProxyRequestException ex) {
             throw new RemoteConnectionException("Error communicating with remote node", ex);

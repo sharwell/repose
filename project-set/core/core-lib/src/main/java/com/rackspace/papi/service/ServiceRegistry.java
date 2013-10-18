@@ -11,18 +11,18 @@ import java.util.List;
 @Component("serviceRegistry")
 public class ServiceRegistry {
     private static final Logger LOG = LoggerFactory.getLogger(ServiceRegistry.class);
-    private final List<ServiceContext> boundServiceContexts;
+    private final List<ServiceContext<?>> boundServiceContexts;
 
     public ServiceRegistry() {
-        boundServiceContexts = new LinkedList<ServiceContext>();
+        boundServiceContexts = new LinkedList<ServiceContext<?>>();
     }
     
-    public void addService(ServiceContext context) {
+    public void addService(ServiceContext<?> context) {
         LOG.debug("Registering Context with service registry: " + context.getServiceName());
         boundServiceContexts.add(context);
     }
     
-    public List<ServiceContext> getServices() {
+    public List<ServiceContext<?>> getServices() {
         return boundServiceContexts;
     }
 }

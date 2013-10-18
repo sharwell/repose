@@ -12,7 +12,7 @@ public abstract class AbstractContext implements Context {
    private final Map<String, Object> environment;
    private final String nameInNamespace;
 
-   public AbstractContext(String contextName, Map environment) {
+   public AbstractContext(String contextName, Map<? extends String, ? extends Object> environment) {
       this.nameInNamespace = contextName;
       this.environment = environment != null ? new HashMap<String, Object>(environment) : new HashMap<String, Object>();
    }
@@ -23,8 +23,8 @@ public abstract class AbstractContext implements Context {
 
    @SuppressWarnings("PMD.ReplaceHashtableWithMap")
    @Override
-   public Hashtable getEnvironment() throws NamingException {
-      return new Hashtable(environment);
+   public Hashtable<String, Object> getEnvironment() throws NamingException {
+      return new Hashtable<String, Object>(environment);
    }
 
    @Override

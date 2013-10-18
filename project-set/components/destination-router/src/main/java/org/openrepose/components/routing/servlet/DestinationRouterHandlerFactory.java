@@ -66,8 +66,8 @@ public class DestinationRouterHandlerFactory extends AbstractConfiguredFilterHan
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        final Map<Class, UpdateListener<?>> updateListeners = new HashMap<Class, UpdateListener<?>>();
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        final Map<Class<?>, UpdateListener<?>> updateListeners = new HashMap<Class<?>, UpdateListener<?>>();
         updateListeners.put(DestinationRouterConfiguration.class, new RoutingConfigurationListener());
         return updateListeners;
     }

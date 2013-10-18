@@ -39,7 +39,7 @@ public class FilterLogicHandlerDelegateTest {
       @Before
       public void beforeAll() {
          servletRequest = mock(HttpServletRequest.class);
-         when(servletRequest.getHeaderNames()).thenReturn(Collections.enumeration(Collections.EMPTY_LIST));
+         when(servletRequest.getHeaderNames()).thenReturn(Collections.enumeration(Collections.<String>emptyList()));
 
          servletResponse = mock(HttpServletResponse.class);
 

@@ -149,7 +149,7 @@ public class ChannelledUpdateListener implements Runnable, UpdateListener {
     private Attachment readData(SelectionKey key) throws IOException {
         SocketChannel client = (SocketChannel) key.channel();
         Attachment attachment = (Attachment) key.attachment();
-        ByteBuffer buffer = (ByteBuffer) attachment.buffer;
+        ByteBuffer buffer = attachment.buffer;
 
         int read;
         while ((read = client.read(buffer)) > 0) {

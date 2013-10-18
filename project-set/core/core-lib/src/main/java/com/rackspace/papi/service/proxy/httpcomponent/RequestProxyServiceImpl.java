@@ -40,7 +40,7 @@ public class RequestProxyServiceImpl implements RequestProxyService {
     private boolean rewriteHostHeader = false;
     private static final String CHUNKED_ENCODING_PARAM = "chunked-encoding";
 
-    private HttpClientService httpClientService;
+    private HttpClientService<?> httpClientService;
 
     private HttpHost getProxiedHost(String targetHost) throws HttpException {
         try {
@@ -127,7 +127,7 @@ public class RequestProxyServiceImpl implements RequestProxyService {
         }
     }
 
-    private ServiceClientResponse execute(HttpRequestBase base) {
+    private <E> ServiceClientResponse<E> execute(HttpRequestBase base) {
         try {
             HttpResponse httpResponse = getClient().execute(base);
             HttpEntity entity = httpResponse.getEntity();
@@ -139,14 +139,14 @@ public class RequestProxyServiceImpl implements RequestProxyService {
                 EntityUtils.consume(entity);
             }
 
-            return new ServiceClientResponse(responseCode.getCode(), stream);
+            return new ServiceClientResponse<E>(responseCode.getCode(), stream);
         } catch (IOException ex) {
             LOG.error("Error executing request", ex);
         } finally {
             base.releaseConnection();
         }
 
-        return new ServiceClientResponse(HttpStatusCode.INTERNAL_SERVER_ERROR.intValue(), null);
+        return new ServiceClientResponse<E>(HttpStatusCode.INTERNAL_SERVER_ERROR.intValue(), (E)null);
     }
 
     @Override
@@ -195,7 +195,7 @@ public class RequestProxyServiceImpl implements RequestProxyService {
         this.rewriteHostHeader = value;
     }
 
-    public void setHttpClientService(HttpClientService httpClientService) {
+    public void setHttpClientService(HttpClientService<?> httpClientService) {
         this.httpClientService = httpClientService;
     }
 }

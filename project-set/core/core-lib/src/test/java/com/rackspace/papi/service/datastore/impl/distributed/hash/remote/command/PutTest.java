@@ -52,7 +52,7 @@ public class PutTest {
          final Put putCommand = new Put(TimeUnit.MINUTES, putData.getBytes(), ttl, "somekey", new InetSocketAddress(InetAddress.getByAddress(new byte[]{127, 0, 0, 1}), 1000));
 
          // RemoteBehavior.ALLOW_FORWARDING
-         final ServiceClientResponse response = mock(ServiceClientResponse.class);
+         final ServiceClientResponse<?> response = mock(ServiceClientResponse.class);
          final String responseData = "Response Data";
 
          ByteArrayInputStream bt = new ByteArrayInputStream(responseData.getBytes("UTF-8"));
@@ -69,7 +69,7 @@ public class PutTest {
          final String putData = "Put data";
          final int ttl = 30;
          final Put putCommand = new Put(TimeUnit.MINUTES, putData.getBytes(), ttl, "somekey", new InetSocketAddress(InetAddress.getByAddress(new byte[]{127, 0, 0, 1}), 1000));
-         final ServiceClientResponse response = mock(ServiceClientResponse.class);
+         final ServiceClientResponse<?> response = mock(ServiceClientResponse.class);
          when(response.getStatusCode()).thenReturn(HttpStatusCode.UNAUTHORIZED.intValue());
 
          putCommand.handleResponse(response);

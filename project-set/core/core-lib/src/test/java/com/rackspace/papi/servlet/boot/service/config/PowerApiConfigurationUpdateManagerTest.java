@@ -134,7 +134,7 @@ public class PowerApiConfigurationUpdateManagerTest {
             throw new UnsupportedOperationException("Not supported yet.");
         }
     };
-    public static final UpdateListener listener = new UpdateListener<String>() {
+    public static final UpdateListener<String> listener = new UpdateListener<String>() {
         private boolean isInitialized = false;
 
         @Override

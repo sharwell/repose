@@ -23,7 +23,7 @@ public class FilterClassFactory {
         return classLoader;
     }
 
-    public void validate(Class clazz) {
+    public Class<? extends Filter> validate(Class<?> clazz) {
         if (clazz == null) {
             throw new PowerApiContextException("No deployed artifact found to satisfy required filter, \""
                     + filterClass
@@ -35,15 +35,16 @@ public class FilterClassFactory {
                     + clazz.getCanonicalName()
                     + "\" does not implement javax.servlet.Filter - this class is unusable as a filter.");
         }
+
+        return clazz.asSubclass(Filter.class);
     }
 
     public Filter newInstance(ApplicationContext parentContext) throws ClassNotFoundException {
-        Class clazz = classLoader.loadClass(filterClass.getFilterClass().getValue());       
-        validate(clazz);
+        Class<? extends Filter> clazz = validate(classLoader.loadClass(filterClass.getFilterClass().getValue()));
 
         try {
             // just loadClass in here and no need to keep Class as member
-            Filter filter = (Filter) clazz.newInstance();
+            Filter filter = clazz.newInstance();
             if (filter instanceof ApplicationContextAware) {
                ((ApplicationContextAware)filter).setApplicationContext(parentContext);
             }

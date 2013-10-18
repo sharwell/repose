@@ -60,7 +60,7 @@ public class HttpResponseParserTest {
         
         @Test
         public void shouldParse() throws IOException, SAXException {
-            Parser parser = ResponseParserFactory.newInstance();
+            Parser<HttpServletResponse, ResponseHeadDetail> parser = ResponseParserFactory.newInstance();
             String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><httpx xmlns=\"http://docs.rackspace.com/httpx/v1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://docs.rackspace.com/httpx/v1.0 ./httpx.xsd\"><response fidelity=\"BODY HEAD\" status-code=\"200\" version=\"HTTP/1.1\"><head fidelity=\"HEADERS\"><headers fidelity=\"*\"><header name=\"Retry-After\"><value>This is a valid date</value></header></headers></head><body/></response></httpx>";
             String alternate = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><httpx xmlns=\"http://docs.rackspace.com/httpx/v1.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://docs.rackspace.com/httpx/v1.0 ./httpx.xsd\"><response fidelity=\"BODY HEAD\" reason=\"\" status-code=\"200\" version=\"HTTP/1.1\"><head fidelity=\"HEADERS\"><headers fidelity=\"*\"><header name=\"Retry-After\"><value>This is a valid date</value></header></headers></head><body/></response></httpx>";
             

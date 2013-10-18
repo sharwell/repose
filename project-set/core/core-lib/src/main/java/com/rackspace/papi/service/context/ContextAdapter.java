@@ -36,7 +36,7 @@ public interface ContextAdapter {
     RequestProxyService requestProxyService();
     ReportingService reportingService();
     String getReposeVersion();
-    HttpClientService httpConnectionPoolService();
+    HttpClientService<?> httpConnectionPoolService();
     RequestHeaderService requestHeaderService();
     ResponseHeaderService responseHeaderService();
     DistributedDatastoreLauncherService distributedDatastoreService();

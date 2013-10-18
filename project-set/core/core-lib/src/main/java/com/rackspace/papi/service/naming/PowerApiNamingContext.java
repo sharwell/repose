@@ -8,12 +8,12 @@ public class PowerApiNamingContext extends LocalContext {
 
     private static final SchemeAwareNameParser NAME_PARSER = new PowerApiNameParser();
 
-    public PowerApiNamingContext(String contextName, Map environment) {
+    public PowerApiNamingContext(String contextName, Map<? extends String, ? extends Object> environment) {
         super(contextName, environment);
     }
 
     @Override
-    protected Context newContext(String contextName, Map environment) throws NamingException {
+    protected Context newContext(String contextName, Map<? extends String, ? extends Object> environment) throws NamingException {
         return new PowerApiNamingContext(contextName, environment);
     }
 

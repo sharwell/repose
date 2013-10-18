@@ -101,23 +101,23 @@ public class MetricsServiceImpl implements MetricsService {
     }
 
     @Override
-    public Meter newMeter( Class klass, String name, String scope, String eventType, TimeUnit unit ) {
+    public Meter newMeter( Class<?> klass, String name, String scope, String eventType, TimeUnit unit ) {
         return metrics.newMeter( makeMetricName( klass, name, scope ), eventType, unit );
     }
 
     @Override
-    public Counter newCounter( Class klass, String name, String scope ) {
+    public Counter newCounter( Class<?> klass, String name, String scope ) {
         return metrics.newCounter( makeMetricName( klass, name, scope ) );
     }
 
 
     @Override
-    public MeterByCategory newMeterByCategory( Class klass, String scope, String eventType, TimeUnit unit ) {
+    public MeterByCategory newMeterByCategory( Class<?> klass, String scope, String eventType, TimeUnit unit ) {
         return new MeterByCategoryImpl( this, klass, scope, eventType, unit );
     }
 
     @Override
-    public MeterByCategorySum newMeterByCategorySum( Class klass, String scope, String eventType, TimeUnit unit ) {
+    public MeterByCategorySum newMeterByCategorySum( Class<?> klass, String scope, String eventType, TimeUnit unit ) {
         return new MeterByCategorySum( this, klass, scope, eventType, unit );
     }
 
@@ -129,7 +129,7 @@ public class MetricsServiceImpl implements MetricsService {
         shutdownGraphite();
     }
 
-    private MetricName makeMetricName( Class klass, String name, String scope ) {
+    private MetricName makeMetricName( Class<?> klass, String name, String scope ) {
         return new MetricName( reposeStrat.getDomainPrefix() + klass.getPackage().getName(),
                                klass.getSimpleName(),
                                name, scope );

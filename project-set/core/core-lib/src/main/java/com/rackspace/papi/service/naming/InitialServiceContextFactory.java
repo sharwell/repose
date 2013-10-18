@@ -9,12 +9,12 @@ import java.util.Hashtable;
 public class InitialServiceContextFactory implements InitialContextFactory {
 
    public Context getInitialContext() throws NamingException {
-      return getInitialContext(new Hashtable());
+      return getInitialContext(new Hashtable<Object, Object>());
    }
 
    @SuppressWarnings("PMD.ReplaceHashtableWithMap")
    @Override
-   public Context getInitialContext(Hashtable environment) throws NamingException {
-      return new PowerApiNamingContext("", environment);
+   public Context getInitialContext(Hashtable<?, ?> environment) throws NamingException {
+      return new PowerApiNamingContext("", (Hashtable<? extends String, ? extends Object>)environment);
    }
 }

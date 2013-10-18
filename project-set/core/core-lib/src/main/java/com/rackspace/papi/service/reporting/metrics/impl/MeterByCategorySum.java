@@ -25,7 +25,7 @@ public class MeterByCategorySum extends MeterByCategoryImpl {
 
     private Meter meter;
 
-    MeterByCategorySum( MetricsService metricsServiceP, Class klassP, String scopeP, String eventTypeP,
+    MeterByCategorySum( MetricsService metricsServiceP, Class<?> klassP, String scopeP, String eventTypeP,
                         TimeUnit unitP ) {
         super( metricsServiceP, klassP, scopeP, eventTypeP, unitP );
 

@@ -4,7 +4,7 @@ import com.rackspace.papi.service.event.common.EventListener;
 
 import java.util.*;
 
-public class EventListenerDescriptor<T extends Enum> {
+public class EventListenerDescriptor<T extends Enum<T>> {
 
     private final EventListener<T, ?> listener;
     private final Set<T> subscriptions;

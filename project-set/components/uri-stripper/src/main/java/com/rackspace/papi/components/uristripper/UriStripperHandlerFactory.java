@@ -25,8 +25,8 @@ public class UriStripperHandlerFactory extends AbstractConfiguredFilterHandlerFa
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>() {
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>() {
             {
                 put(UriStripperConfig.class, new UriTranslationConfigurationListener());
             }

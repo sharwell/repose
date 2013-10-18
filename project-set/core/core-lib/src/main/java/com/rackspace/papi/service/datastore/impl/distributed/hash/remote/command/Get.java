@@ -22,12 +22,12 @@ public class Get extends AbstractRemoteCommand {
    }
 
     @Override
-    public ServiceClientResponse execute(RequestProxyService proxyService, RemoteBehavior remoteBehavior) {
+    public <E> ServiceClientResponse<E> execute(RequestProxyService proxyService, RemoteBehavior remoteBehavior) {
         return proxyService.get(getBaseUrl(), getCacheObjectKey(), getHeaders(remoteBehavior));
     }
     
    @Override
-   public Object handleResponse(ServiceClientResponse response) throws IOException {
+   public Object handleResponse(ServiceClientResponse<?> response) throws IOException {
       final int statusCode = response.getStatusCode();
 
       if (statusCode == HttpStatusCode.OK.intValue()) {

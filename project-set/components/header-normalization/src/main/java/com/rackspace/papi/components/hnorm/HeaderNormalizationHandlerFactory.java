@@ -25,8 +25,8 @@ public class HeaderNormalizationHandlerFactory extends AbstractConfiguredFilterH
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        return new HashMap<Class, UpdateListener<?>>() {
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        return new HashMap<Class<?>, UpdateListener<?>>() {
             {
                 put(HeaderNormalizationConfig.class, new ContentNormalizationConfigurationListener());
             }

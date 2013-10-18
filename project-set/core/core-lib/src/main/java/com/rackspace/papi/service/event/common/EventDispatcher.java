@@ -4,6 +4,6 @@ public interface EventDispatcher {
 
    void dispatch();
 
-   Event getEvent();
+   Event<?, ?> getEvent();
    
 }

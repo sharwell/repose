@@ -67,8 +67,8 @@ public class UriNormalizationHandlerFactory extends AbstractConfiguredFilterHand
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        final Map<Class, UpdateListener<?>> listenerMap = new HashMap<Class, UpdateListener<?>>();
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        final Map<Class<?>, UpdateListener<?>> listenerMap = new HashMap<Class<?>, UpdateListener<?>>();
         listenerMap.put(UriNormalizationConfig.class, new UriNormalizationConfigurationListener());
 
         return listenerMap;

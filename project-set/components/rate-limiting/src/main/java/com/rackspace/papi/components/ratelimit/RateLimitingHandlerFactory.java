@@ -39,8 +39,8 @@ public class RateLimitingHandlerFactory extends AbstractConfiguredFilterHandlerF
     }
 
     @Override
-    protected Map<Class, UpdateListener<?>> getListeners() {
-        final Map<Class, UpdateListener<?>> listenerMap = new HashMap<Class, UpdateListener<?>>();
+    protected Map<Class<?>, UpdateListener<?>> getListeners() {
+        final Map<Class<?>, UpdateListener<?>> listenerMap = new HashMap<Class<?>, UpdateListener<?>>();
         listenerMap.put(RateLimitingConfiguration.class, new RateLimitingConfigurationListener());
 
         return listenerMap;

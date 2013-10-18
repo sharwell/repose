@@ -22,9 +22,9 @@ public enum ElementFactory {
    
    private final String tokenName;
    private final String elementName;
-   private final Class elementClass;
+   private final Class<? extends Element> elementClass;
    
-   ElementFactory(String tokenName, String elementName, Class elementClass) {
+   ElementFactory(String tokenName, String elementName, Class<? extends Element> elementClass) {
       this.tokenName = tokenName;
       this.elementName = elementName;
       this.elementClass = elementClass;

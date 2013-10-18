@@ -17,11 +17,11 @@ public interface ConfigurationService extends Destroyable {
     void setResourceResolver(ConfigurationResourceResolver resourceResolver);
     ConfigurationResourceResolver getResourceResolver();
     void setUpdateManager(ConfigurationUpdateManager updateManager);
-     <T> void subscribeTo(String configurationName,  UpdateListener<T> listener, Class<T> configurationClass);
-     <T> void subscribeTo(String filterName,String configurationName,  UpdateListener<T> listener, Class<T> configurationClass);
-     <T> void subscribeTo(String configurationName, URL xsdStreamSource, UpdateListener<T> listener, Class<T> configurationClass);
-    <T> void subscribeTo(String filterName,String configurationName, URL xsdStreamSource, UpdateListener<T> listener, Class<T> configurationClass);
-    <T> void subscribeTo(String filterName,String configurationName, UpdateListener<T> listener, ConfigurationParser<T> customParser);
-    <T> void subscribeTo(String filterName,String configurationName, UpdateListener<T> listener, ConfigurationParser<T> customParser, boolean sendNotificationNow);
-    void unsubscribeFrom(String configurationName, UpdateListener plistener);
+    <T> void subscribeTo(String configurationName,  UpdateListener<? super T> listener, Class<T> configurationClass);
+    <T> void subscribeTo(String filterName,String configurationName,  UpdateListener<? super T> listener, Class<T> configurationClass);
+    <T> void subscribeTo(String configurationName, URL xsdStreamSource, UpdateListener<? super T> listener, Class<T> configurationClass);
+    <T> void subscribeTo(String filterName,String configurationName, URL xsdStreamSource, UpdateListener<? super T> listener, Class<T> configurationClass);
+    <T> void subscribeTo(String filterName,String configurationName, UpdateListener<? super T> listener, ConfigurationParser<T> customParser);
+    <T> void subscribeTo(String filterName,String configurationName, UpdateListener<? super T> listener, ConfigurationParser<T> customParser, boolean sendNotificationNow);
+    void unsubscribeFrom(String configurationName, UpdateListener<?> plistener);
 }
