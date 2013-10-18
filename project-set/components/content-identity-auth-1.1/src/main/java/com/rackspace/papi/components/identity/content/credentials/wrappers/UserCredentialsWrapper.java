@@ -14,7 +14,7 @@ public class UserCredentialsWrapper extends CredentialsWrapper<UserCredentials> 
       super(FIELDS);
    }
    
-   public UserCredentialsWrapper(Map map) {
+   public UserCredentialsWrapper(Map<String, Object> map) {
       super(FIELDS);
       validate(map);
       

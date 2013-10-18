@@ -32,8 +32,8 @@ public class JsonJaxbAuthContentParser implements AuthContentParser {
    
    @Override
    public AuthCredentials parse(String body) {
-      for (Class<? extends CredentialsWrapper> wrapper: CredentialsWrapper.WRAPPERS) {
-         CredentialsWrapper candidate = transform.deserialize(body, wrapper);
+      for (Class<? extends CredentialsWrapper<?>> wrapper: CredentialsWrapper.WRAPPERS) {
+         CredentialsWrapper<?> candidate = transform.deserialize(body, wrapper);
          if (candidate != null) {
             return candidate;
          }

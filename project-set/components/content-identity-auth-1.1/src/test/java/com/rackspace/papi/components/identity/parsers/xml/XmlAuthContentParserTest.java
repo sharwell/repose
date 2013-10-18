@@ -33,7 +33,7 @@ public class XmlAuthContentParserTest {
       @Before
       public void setup() throws JAXBException {
          jaxbContext = JAXBContext.newInstance(com.rackspacecloud.docs.auth.api.v1.ObjectFactory.class);
-         xmlTransformer = new StreamToJaxbTransform(jaxbContext);
+         xmlTransformer = new StreamToJaxbTransform<Credentials>(jaxbContext);
          parser = new XmlAuthContentParser(xmlTransformer);
       }
 

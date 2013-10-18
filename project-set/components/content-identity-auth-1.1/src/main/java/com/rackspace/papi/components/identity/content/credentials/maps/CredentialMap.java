@@ -22,7 +22,7 @@ public class CredentialMap extends HashMap<String, Object> {
          throw new CredentialException("Invalid auth map");
       }
 
-      return (String) keySet().iterator().next();
+      return keySet().iterator().next();
    }
 
    private Map<String, Object> getCredentialsMap(String key) {

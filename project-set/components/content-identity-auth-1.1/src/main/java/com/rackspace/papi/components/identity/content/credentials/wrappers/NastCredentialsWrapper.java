@@ -14,7 +14,7 @@ public class NastCredentialsWrapper extends CredentialsWrapper<NastCredentials> 
       super(FIELDS);
    }
    
-   public NastCredentialsWrapper(Map map) {
+   public NastCredentialsWrapper(Map<String, Object> map) {
       super(FIELDS);
       validate(map);
       

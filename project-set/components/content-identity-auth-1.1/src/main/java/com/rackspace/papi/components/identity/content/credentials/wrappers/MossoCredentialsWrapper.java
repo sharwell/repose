@@ -14,7 +14,7 @@ public class MossoCredentialsWrapper extends CredentialsWrapper<MossoCredentials
       super(FIELDS);
    }
    
-   public MossoCredentialsWrapper(Map map) {
+   public MossoCredentialsWrapper(Map<String, Object> map) {
       super(FIELDS);
       validate(map);
       

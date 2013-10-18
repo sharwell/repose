@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class CredentialsWrapper<T extends Credentials> implements AuthCredentials {
-   public static final List<Class<? extends CredentialsWrapper>> WRAPPERS = new ArrayList<Class<? extends CredentialsWrapper>>();
+   public static final List<Class<? extends CredentialsWrapper<?>>> WRAPPERS = new ArrayList<Class<? extends CredentialsWrapper<?>>>();
    static {
       WRAPPERS.add(UserCredentialsWrapper.class);
       WRAPPERS.add(MossoCredentialsWrapper.class);
@@ -29,7 +29,7 @@ public abstract class CredentialsWrapper<T extends Credentials> implements AuthC
    }
    
    
-   public void validate(Map map) {
+   public void validate(Map<String, ?> map) {
       if (fields == null) {
          return;
       }

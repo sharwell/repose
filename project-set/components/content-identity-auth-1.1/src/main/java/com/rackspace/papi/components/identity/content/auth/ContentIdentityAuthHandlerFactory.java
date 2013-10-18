@@ -28,7 +28,7 @@ public class ContentIdentityAuthHandlerFactory extends AbstractConfiguredFilterH
 
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(com.rackspacecloud.docs.auth.api.v1.ObjectFactory.class);
-            xmlTransformer = new StreamToJaxbTransform(jaxbContext);
+            xmlTransformer = new StreamToJaxbTransform<Credentials>(jaxbContext);
         } catch (JAXBException e) {
             LOG.error("Error when creating JABXContext for auth credentials. Reason: " + e.getMessage(), e);
         }
