@@ -73,7 +73,7 @@ public class SchemaTest {
         public void output() throws Exception {
             final LimitsEntityTransformer transformer = new LimitsEntityTransformer(jaxbContext);
 
-            final Transform<InputStream, JAXBElement<Limits>> limitsTransformer = new StreamToJaxbTransform(jaxbContext);
+            final Transform<InputStream, JAXBElement<Limits>> limitsTransformer = new StreamToJaxbTransform<Limits>(jaxbContext);
             
             final JAXBElement<Limits> limitsElement = 
                     limitsTransformer.transform(SchemaTest.class.getResourceAsStream("/META-INF/schema/examples/limits.xml"));

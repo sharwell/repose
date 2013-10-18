@@ -22,7 +22,7 @@ public class LimitsEntityStreamTransformer {
 
     private final StreamTransform<LimitsTransformPair, OutputStream> combiner;
     private final StreamTransform<InputStream, OutputStream> jsonTransform;
-    private final StreamTransform<JAXBElement<Limits>, OutputStream> entiyTransform;
+    private final StreamTransform<JAXBElement<?>, OutputStream> entiyTransform;
 
     public LimitsEntityStreamTransformer() {
         this(buildJaxbContext());
@@ -37,7 +37,7 @@ public class LimitsEntityStreamTransformer {
                 TransformHelper.getTemplatesFromInputStream(
                         LimitsEntityStreamTransformer.class.getResourceAsStream(COMBINER_XSL_LOCATION)), context, LIMITS_OBJECT_FACTORY);
 
-        entiyTransform = new JaxbToStreamTransform(context);
+        entiyTransform = new JaxbToStreamTransform<OutputStream>(context);
     }
 
     private static JAXBContext buildJaxbContext() {
