@@ -44,6 +44,7 @@ public class UriNormalizationHandlerTest {
 
          normalizers.add(queryParameterNormalizer);
 
+         @SuppressWarnings("unchecked") // mocking
          final Normalizer<String> mockedNormalizer = mock(Normalizer.class);
          when(mockedNormalizer.normalize(anyString())).thenReturn("a=1");
 
