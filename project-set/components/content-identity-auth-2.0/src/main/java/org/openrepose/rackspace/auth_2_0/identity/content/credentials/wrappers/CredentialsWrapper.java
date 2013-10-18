@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 public abstract class CredentialsWrapper<T extends CredentialType> implements AuthCredentials {
-   public static final List<Class<? extends CredentialsWrapper>> WRAPPERS = new ArrayList<Class<? extends CredentialsWrapper>>();
+   public static final List<Class<? extends CredentialsWrapper<?>>> WRAPPERS = new ArrayList<Class<? extends CredentialsWrapper<?>>>();
    static {
       WRAPPERS.add(ApiKeyCredentialsWrapper.class);
       WRAPPERS.add(PasswordCredentialsWrapper.class);
@@ -28,7 +28,7 @@ public abstract class CredentialsWrapper<T extends CredentialType> implements Au
    }
 
 
-   public void validate(Map map) {
+   public void validate(Map<String, ?> map) {
       if (fields == null) {
          return;
       }
