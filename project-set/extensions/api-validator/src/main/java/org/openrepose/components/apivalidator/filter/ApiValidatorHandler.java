@@ -59,7 +59,7 @@ public class ApiValidatorHandler extends AbstractFilterLogicHandler {
    }
 
    private Set<String> getRolesAsSet(List<? extends HeaderValue> listRoles) {
-      Set<String> roles = new HashSet();
+      Set<String> roles = new HashSet<String>();
 
       for (HeaderValue role : listRoles) {
          roles.add(role.getValue());

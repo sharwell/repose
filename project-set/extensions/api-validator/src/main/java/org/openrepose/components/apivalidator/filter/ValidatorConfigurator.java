@@ -97,7 +97,7 @@ public abstract class ValidatorConfigurator {
             ValidatorInfo validator =
                   validatorItem.getAny() != null
                         ? new ValidatorInfo(validatorItem.getRole(),
-                                            (Element) validatorItem.getAny(),
+                                            validatorItem.getAny(),
                                             getWadlPath(config, configRoot),
                                             configuration,
                                             validatorItem.getValidatorName())

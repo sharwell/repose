@@ -30,6 +30,7 @@ public class DispatchHandlerTest {
     
     @Test
     public void shouldCallInitOnEachHandler() {
+      @SuppressWarnings("unchecked") // mocking
       Option<Document> option = mock(Option.class);
       instance.init(null,option);
       verify(handler1).init(null, option);
@@ -50,7 +51,7 @@ public class DispatchHandlerTest {
     
     @Test
     public void shouldHandleNullHandlerList() {
-        DispatchHandler instance = new DispatchHandler(null);
+        DispatchHandler instance = new DispatchHandler((ResultHandler[])null);
         instance.init(null,null);
         instance.handle(null, null, null, null);
     }
