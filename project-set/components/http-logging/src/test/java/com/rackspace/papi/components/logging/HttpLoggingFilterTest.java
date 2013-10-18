@@ -65,6 +65,7 @@ public class HttpLoggingFilterTest {
     public static class WhenInitializing extends BaseTest {
 
         @Test
+        @SuppressWarnings("unchecked") // mocking
         public void shouldSubscribeToConfigFile() throws ServletException {
             filter.init(filterConfig);
             URL xsdURL = getClass().getResource("/META-INF/schema/config/http-logging-configuration.xsd");

@@ -10,7 +10,6 @@ import java.net.URL;
 import javax.servlet.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.util.logging.resources.logging;
 
 /**
  *
