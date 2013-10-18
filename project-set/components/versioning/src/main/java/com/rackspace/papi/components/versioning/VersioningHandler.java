@@ -8,6 +8,7 @@ import com.rackspace.papi.components.versioning.domain.VersionedHostNotFoundExce
 import com.rackspace.papi.components.versioning.domain.VersionedOriginService;
 import com.rackspace.papi.components.versioning.domain.VersionedRequest;
 import com.rackspace.papi.components.versioning.schema.ObjectFactory;
+import com.rackspace.papi.components.versioning.schema.VersionChoice;
 import com.rackspace.papi.components.versioning.schema.VersionChoiceList;
 import com.rackspace.papi.components.versioning.util.ContentTransformer;
 import com.rackspace.papi.components.versioning.util.VersionChoiceFactory;
@@ -105,7 +106,7 @@ public class VersioningHandler extends AbstractFilterLogicHandler {
    private void handleVersionedRequest(VersionedRequest versionedRequest, FilterDirector filterDirector, VersionedOriginService targetOriginService) throws VersionedHostNotFoundException, MalformedURLException {
       // Is this a request to a version root we are aware of for describing it? (e.g. http://api.service.com/v1.0/)
       if (versionedRequest.isRequestForRoot() || versionedRequest.requestMatchesVersionMapping()) {
-         final JAXBElement versionElement = VERSIONING_OBJECT_FACTORY.createVersion(new VersionChoiceFactory(targetOriginService.getMapping()).create());
+         final JAXBElement<VersionChoice> versionElement = VERSIONING_OBJECT_FACTORY.createVersion(new VersionChoiceFactory(targetOriginService.getMapping()).create());
 
          transformer.transform(versionElement, versionedRequest.getRequestInfo().getPreferedMediaRange(), filterDirector.getResponseOutputStream());
 

@@ -47,7 +47,7 @@ public class ContentTransformer {
         }
     }
 
-    public void transform(JAXBElement element, MediaType mediaRange, OutputStream outputStream) {
+    public void transform(JAXBElement<?> element, MediaType mediaRange, OutputStream outputStream) {
         switch (mediaRange.getMimeType()) {
             case APPLICATION_XML:
                 xmlStreamTransform.transform(element, outputStream);
@@ -61,7 +61,7 @@ public class ContentTransformer {
     }
 
     @Deprecated
-    public String transform(JAXBElement element, MediaType mediaRange) {
+    public String transform(JAXBElement<?> element, MediaType mediaRange) {
         switch (mediaRange.getMimeType()) {
             case APPLICATION_XML:
                 return xmlTransform.transform(element);

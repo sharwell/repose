@@ -42,7 +42,7 @@ public class XmlTestHelper {
         return schema;
     }
 
-    public static String getXmlString(JAXBElement versioningInfo, Boolean formatXml, Schema schema) throws JAXBException {
+    public static String getXmlString(JAXBElement<?> versioningInfo, Boolean formatXml, Schema schema) throws JAXBException {
         String packageName = versioningInfo.getValue().getClass().getPackage().getName();
         JAXBContext context = JAXBContext.newInstance(packageName);
         Marshaller marshaller = context.createMarshaller();

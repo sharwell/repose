@@ -107,9 +107,9 @@ public class ConfigurationData {
    public VersionedMapType getServiceVersionForMediaRange(MediaType preferedMediaRange) {
       com.rackspace.papi.components.versioning.config.MediaType mediaType;
       for (Map.Entry<String, ServiceVersionMapping> serviceMapping : serviceMappings.entrySet()) {
-         mediaType = getMatchingMediaType((ServiceVersionMapping) serviceMapping.getValue(), preferedMediaRange);
+         mediaType = getMatchingMediaType(serviceMapping.getValue(), preferedMediaRange);
          if (mediaType != null) {
-            return new VersionedMapType((ServiceVersionMapping) serviceMapping.getValue(), mediaType);
+            return new VersionedMapType(serviceMapping.getValue(), mediaType);
          }
       }
       return null;
