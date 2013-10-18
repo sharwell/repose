@@ -38,7 +38,7 @@ public class CompressionHandler extends AbstractFilterLogicHandler {
    public FilterDirector handleRequest(HttpServletRequest request, ReadableHttpServletResponse response) {
 
       final FilterDirector myDirector = new FilterDirectorImpl();
-      final MutableHttpServletRequest mutableHttpRequest = MutableHttpServletRequest.wrap((HttpServletRequest) request);
+      final MutableHttpServletRequest mutableHttpRequest = MutableHttpServletRequest.wrap(request);
       myDirector.setFilterAction(FilterAction.RETURN);
 
       if (chain == null) {
