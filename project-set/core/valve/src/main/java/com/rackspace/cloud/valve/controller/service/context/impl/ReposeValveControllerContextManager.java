@@ -59,7 +59,7 @@ public class ReposeValveControllerContextManager implements ServletContextListen
    @Override
    public void contextDestroyed(ServletContextEvent sce) {
       ServiceRegistry registry = applicationContext.getBean("serviceRegistry", ServiceRegistry.class);
-      for (ServiceContext ctx : registry.getServices()) {
+      for (ServiceContext<?> ctx : registry.getServices()) {
          ctx.contextDestroyed(sce);
       }
 

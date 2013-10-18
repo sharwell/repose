@@ -30,6 +30,7 @@ public class PowerApiValveServerControl {
     private CommandLineArguments commandLineArgs;
     private final List<Port> ports = new ArrayList<Port>();
 
+    @SuppressWarnings("deprecation") // impl still supports deprecated feature
     public PowerApiValveServerControl(CommandLineArguments commandLineArgs) {
         this.commandLineArgs = commandLineArgs;
 
@@ -42,6 +43,7 @@ public class PowerApiValveServerControl {
         }
     }
 
+    @SuppressWarnings("deprecation") // impl still supports deprecated feature
     private SslConfiguration validateSsl() throws MalformedURLException {
         SslConfiguration sslConfiguration = null;
 

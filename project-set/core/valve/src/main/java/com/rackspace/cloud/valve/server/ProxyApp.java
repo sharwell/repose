@@ -63,12 +63,14 @@ public final class ProxyApp {
    private static boolean validPorts(CommandLineArguments commandLineArgs) {
       boolean valid = true;
 
+      @SuppressWarnings("deprecation") // impl still supports deprecated feature
       Integer httpPort = commandLineArgs.getHttpPort();
       if ((httpPort != null) && (!(portIsInRange(httpPort)))) {
          LOG.info("Invalid Repose http port, use a value between 1024 and 49150");
          valid = false;
       }
 
+      @SuppressWarnings("deprecation") // impl still supports deprecated feature
       Integer httpsPort = commandLineArgs.getHttpsPort();
       if (httpsPort != null && !portIsInRange(httpsPort)) {
          LOG.info("Invalid Repose https port, use a value between 1024 and 49150");

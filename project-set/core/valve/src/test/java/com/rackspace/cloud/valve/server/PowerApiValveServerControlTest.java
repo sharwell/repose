@@ -17,6 +17,7 @@ public class PowerApiValveServerControlTest {
         CommandLineArguments commandLineArguments;
 
         @Before
+        @SuppressWarnings("deprecation") // impl still supports deprecated feature
         public void setUp() throws Exception {
             AppenderForTesting.clear();
             commandLineArguments = new CommandLineArguments();

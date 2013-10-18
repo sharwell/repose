@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppenderForTesting extends AppenderSkeleton {
-    private static List messages = new ArrayList();
+    private static List<String> messages = new ArrayList<String>();
 
     protected void append(LoggingEvent event) {
         messages.add(event.getRenderedMessage());
@@ -21,7 +21,7 @@ public class AppenderForTesting extends AppenderSkeleton {
     }
 
     public static String[] getMessages() {
-        return (String[]) messages.toArray(new String[messages.size()]);
+        return messages.toArray(new String[messages.size()]);
     }
 
     public static void clear() {
