@@ -91,6 +91,7 @@ public class ReplicatedDatastoreFilterTest {
    public static class WhenRegisteringDatastore extends TestParent {
 
       @Test
+      @SuppressWarnings("unchecked") // mocking
       public void shouldRegisterDatastore() throws Exception {
          filter.init(mockFilterConfig);
          verify(configurationService,times(2)).subscribeTo(anyString(),anyString(),any(UpdateListener.class),any(Class.class));

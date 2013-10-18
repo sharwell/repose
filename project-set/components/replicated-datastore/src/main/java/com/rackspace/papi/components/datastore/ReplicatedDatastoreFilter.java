@@ -13,6 +13,7 @@ import javax.servlet.*;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.Configuration;
+import net.sf.ehcache.config.PersistenceConfiguration;
 import org.openrepose.components.datastore.replicated.config.ReplicatedDatastoreConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +45,7 @@ public class ReplicatedDatastoreFilter implements Filter {
 
         Configuration defaultConfiguration = new Configuration();
         defaultConfiguration.setName(reposeInstanceInfo.toString() + ":" + CACHE_MANAGER_NAME);
-        defaultConfiguration.setDefaultCacheConfiguration(new CacheConfiguration().diskPersistent(false));
+        defaultConfiguration.setDefaultCacheConfiguration(new CacheConfiguration().persistence(new PersistenceConfiguration().strategy(PersistenceConfiguration.Strategy.NONE)));
         defaultConfiguration.setUpdateCheck(false);
 
         ehCacheManager = CacheManager.newInstance(defaultConfiguration);
